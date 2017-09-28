@@ -10,7 +10,11 @@ public class BaseController : MonoBehaviour {
     public enum PlayerState { IDLE, ATTACK, DEATH, MIMIC };
     public PlayerState playerState;
 
+<<<<<<< HEAD
     public SphereCollider myCollider;
+=======
+    public CircleCollider2D myCollider;
+>>>>>>> Keil
 
     public bool isEnemyAI = false;
 
@@ -28,7 +32,11 @@ public class BaseController : MonoBehaviour {
     public ClassBase playerClass;
 
 	void Start () {
+<<<<<<< HEAD
         myCollider = GetComponent<SphereCollider>();
+=======
+        myCollider = GetComponent<CircleCollider2D>();
+>>>>>>> Keil
         playerClass = (ClassMirror)playerClass;
         playerState = PlayerState.IDLE;
     }
