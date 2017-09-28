@@ -5,42 +5,56 @@ using UnityEngine;
 public class ClassMirror : ClassBase {
 
     // The default starting character: Mirror
-    
+    public BoxCollider2D mimicCollider;
+    bool canMimic = false;
+    ClassBase otherClass;   
 
 	// Use this for initialization
 	override public void Start ()
     {
-		
-	}    
+        mimicCollider = gameObject.AddComponent<BoxCollider2D>();                
+        mimicCollider.size = new Vector3(1.5f, 1f, 1f);
 
-    public void HandleInput()
+        otherClass = null;
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
     {
-        // MOVEMENT
-        //if colliding == true 
-        //&& collider.gameObject.getcomponentnt<baseController>().playerClass == ClassRockGuy
-        //&& collider.gameObject.getcomponentnt<baseController>().playerState == PlayerState.ATTACK
-
-        // JUMP
-        if (Input.GetButton("Jump"))
+        if (other.gameObject.GetComponent<BaseController>())
         {
-            // Do jump
+            canMimic = true;
+            otherClass = other.gameObject.GetComponent<BaseController>().playerClass;
+        }
+        else
+        {
+            canMimic = false;
+            otherClass = null;
+        }
+    }
+
+    override public void HandleInput()
+    {
+        // Use default movement and jump
+        base.HandleInput();
+
+        // MIMIC
+        if (Input.GetButton("Fire2") && canMimic)
+        {
+            control.playerState = BaseController.PlayerState.MIMIC;
+
+            if (otherClass != null)
+            {
+                control.playerClass = otherClass;                
+                Destroy(otherClass.gameObject);                
+            } 
+            
         }
 
         // ATTACK
         if (Input.GetButton("Fire1"))
         {
-            //does nothing for mirror class
+            //mirror class can't attack
         }
-
-        // MIMIC
-        if (Input.GetButton("Fire2"))
-        {
-            //if colliding
-            //playerClass = collidingsclass
-            //collidingclass disabled
-
-        }
-         
     }
 
     // Update is called once per frame
@@ -50,8 +64,7 @@ public class ClassMirror : ClassBase {
         if (control.isEnemyAI)
         {
             // do AI stuff
-
-
+            // Mirror doesn't have AI (maybe)
         }
 
         else
@@ -59,6 +72,9 @@ public class ClassMirror : ClassBase {
             // do playerInput stuff
             HandleInput();
         }       
+
+        // Handle Death
+
 
     }
 }
