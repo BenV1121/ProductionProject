@@ -7,15 +7,16 @@ public class ClassMirror : ClassBase {
     // The default starting character: Mirror
     public BoxCollider2D mimicCollider;
     public bool canMimic = false;
-    public ClassBase otherClass;   
+    public ClassBase otherClass;
+    public System.Type otherType;
 
 	// Use this for initialization
 	override public void Start ()
     {
         base.Start();
 
-        mimicCollider = gameObject.AddComponent<BoxCollider2D>();                
-        mimicCollider.size = new Vector3(1.5f, 1f, 1f);
+        //mimicCollider = gameObject.AddComponent<BoxCollider2D>();                
+        //mimicCollider.size = new Vector3(1.5f, 1f, 1f);
 
         otherClass = null;
     }
@@ -34,6 +35,8 @@ public class ClassMirror : ClassBase {
         }
     }
 
+    
+
     override public void HandleInput()
     {
         // Use default movement and jump
@@ -46,8 +49,10 @@ public class ClassMirror : ClassBase {
 
             if (otherClass != null)
             {
-                control.playerClass = otherClass;                
-                Destroy(otherClass.gameObject);                
+                //otherType = otherClass.GetType();
+                gameObject.AddComponent(otherClass.GetType());
+                Destroy(otherClass.gameObject);
+                Destroy(this);
             } 
             
         }
