@@ -7,19 +7,52 @@ public class ClassBase : MonoBehaviour {
     // The base class that all other player controllable classes should inherit from.        
     // See ClassMirror for example of inheritance.
 
-
     //The player controller. Use this to access/modify variables.
     public BaseController control;
 
     // TODO: Sprite Animation Hookup
-   
+    public Sprite sprite;
+    float speed;
+    Vector2 movement = new Vector2(0,0);
 
     // Use this for initialization
     public virtual void Start ()
+    {        
+        control = transform.GetComponent<BaseController>();
+        speed = BaseController.walkSpeed;
+    }
+
+    public virtual void HandleInput()
     {
-        if (transform.GetComponent<BaseController>())
-            control = transform.GetComponent<BaseController>();
-	}
+        // Basic Horizontal movement
+        float xInput = Input.GetAxis("Horizontal");
+        
+        movement.x = xInput * control.walkSpeedMult * speed;
+        control.rb.AddForce(movement, ForceMode2D.Impulse);
+
+        // Movement Clamping
+        if (control.rb.velocity.x > control.maxWalkSpeed)
+            control.rb.velocity = new Vector2(control.maxWalkSpeed, control.rb.velocity.y);
+
+        if (control.rb.velocity.x < -control.maxWalkSpeed)
+            control.rb.velocity = new Vector2(-control.maxWalkSpeed, control.rb.velocity.y);
+
+        // Jump
+        if (Input.GetButton("Jump") && control.isJumping == false)
+        {
+            control.isJumping = true;
+            control.isGrounded = false;
+            control.rb.AddForce(Vector2.up * control.maxJumpForce, ForceMode2D.Impulse);
+        }        
+
+        // Attack
+        if (Input.GetButton("Fire1"))
+        {
+            //does nothing for base class
+        }
+
+        
+    }
 
     public virtual void UpdateSprite()
     {
@@ -44,9 +77,28 @@ public class ClassBase : MonoBehaviour {
                 
     }
 
+    public virtual void FixedUpdate()
+    {
+        HandleInput();
+    }
+
     // Update is called once per frame
     public virtual void Update () {
-
+        //HandleInput();
         UpdateSprite();
+
+
+        // GO back to after doing actions if not doing anything
+        switch (control.playerState)
+        {
+            case BaseController.PlayerState.ATTACK:
+                //go back to idle after certain time
+                break;
+
+            case BaseController.PlayerState.MIMIC:
+                //go back to idle after certain time
+                break;
+        }
+
     }
 }

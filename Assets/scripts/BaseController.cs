@@ -11,39 +11,85 @@ public class BaseController : MonoBehaviour {
     public PlayerState playerState;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public SphereCollider myCollider;
 =======
     public CircleCollider2D myCollider;
 >>>>>>> Keil
+=======
+    public CircleCollider2D myCollider;
+
+    public Rigidbody2D rb;
+>>>>>>> a867e4309f8c1d30788539e9a78b2c71b5351f98
 
     public bool isEnemyAI = false;
+    public bool isDead = false;
 
     //Mimic variables
     public const float mimicDuration = 10f;
     public float mimicTimer = 0;
 
     //Movement variables
-    public float maxJumpForce = 2f;
+    public float maxJumpForce = 5f;
+
+    // Modify gravity in your enemy code
+    const float fallSpeed = 5f;
+    public float fallSpeedMult = 1.0f;
     public bool isJumping = false;
+    public bool isGrounded = false;
+
     public bool canDoubleJump = false;
-    public const ushort maxJumps = 1;
+    public ushort maxJumps = 1;
+
+    // Modify walkSpeedForce in your enemy code
+    public const float walkSpeed = 1f;
+    public float maxWalkSpeed = 2.5f;
+    public float walkSpeedMult = 1.0f;
 
     //The changing class which the mimic mechanic relies on
     public ClassBase playerClass;
 
 	void Start () {
 <<<<<<< HEAD
+<<<<<<< HEAD
         myCollider = GetComponent<SphereCollider>();
 =======
         myCollider = GetComponent<CircleCollider2D>();
 >>>>>>> Keil
+=======
+        if (GetComponent<CircleCollider2D>())
+            myCollider = GetComponent<CircleCollider2D>();
+
+        if (GetComponent<Rigidbody2D>())
+            rb = GetComponent<Rigidbody2D>();
+
+>>>>>>> a867e4309f8c1d30788539e9a78b2c71b5351f98
         playerClass = (ClassMirror)playerClass;
         playerState = PlayerState.IDLE;
+
+
     }
 	
 	void Update () {
-        
-        playerClass.Update();
+
+        if (!isDead)
+        {
+            playerClass.Update();
+        }
+
+
+
+        //Code for mimic duration. Disabled for now unless we want it back
+        //if (playerClass != (ClassMirror)playerClass)
+        //{
+        //    mimicTimer += Time.deltaTime;
+        //}
+
+        //if (mimicTimer >= mimicDuration)
+        //{
+        //    playerClass = (ClassMirror)playerClass;
+        //    mimicTimer = 0;
+        //}
 
 	}    
 }
