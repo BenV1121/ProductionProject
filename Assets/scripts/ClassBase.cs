@@ -7,7 +7,6 @@ public class ClassBase : MonoBehaviour {
     // The base class that all other player controllable classes should inherit from.        
     // See ClassMirror for example of inheritance.
 
-
     //The player controller. Use this to access/modify variables.
     public BaseController control;
 
@@ -18,9 +17,8 @@ public class ClassBase : MonoBehaviour {
 
     // Use this for initialization
     public virtual void Start ()
-    {
-        if (transform.GetComponent<BaseController>())
-            control = transform.GetComponent<BaseController>();
+    {        
+        control = transform.GetComponent<BaseController>();
         speed = BaseController.walkSpeed;
     }
 
@@ -30,16 +28,15 @@ public class ClassBase : MonoBehaviour {
         float xInput = Input.GetAxis("Horizontal");
         
         movement.x = xInput * control.walkSpeedMult * speed;
+        control.rb.AddForce(movement * xInput * control.walkSpeedMult);
 
         // JUMP
         if (Input.GetButton("Jump") && control.isJumping == false)
         {
             control.isJumping = true;
             control.isGrounded = false;
-            movement.y += control.maxJumpForce;
-        }
-
-        control.rb.AddForce(movement, ForceMode2D.Impulse);        
+            control.rb.AddForce(Vector2.up * control.maxJumpForce, ForceMode2D.Impulse);
+        }        
 
         // ATTACK
         if (Input.GetButton("Fire1"))

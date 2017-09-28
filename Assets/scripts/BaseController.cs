@@ -22,7 +22,7 @@ public class BaseController : MonoBehaviour {
     public float mimicTimer = 0;
 
     //Movement variables
-    public float maxJumpForce = 2f;
+    public float maxJumpForce = 5f;
 
     // Modify gravity in your enemy code
     const float fallSpeed = 5f;
@@ -34,8 +34,8 @@ public class BaseController : MonoBehaviour {
     public ushort maxJumps = 1;
 
     // Modify walkSpeedForce in your enemy code
-    public const float walkSpeed = 5f;
-    public float walkSpeedMult = 1.0f;
+    public const float walkSpeed = 1f;
+    public float walkSpeedMult = 4.0f;
 
     //The changing class which the mimic mechanic relies on
     public ClassBase playerClass;

@@ -6,12 +6,14 @@ public class ClassMirror : ClassBase {
 
     // The default starting character: Mirror
     public BoxCollider2D mimicCollider;
-    bool canMimic = false;
-    ClassBase otherClass;   
+    public bool canMimic = false;
+    public ClassBase otherClass;   
 
 	// Use this for initialization
 	override public void Start ()
     {
+        base.Start();
+
         mimicCollider = gameObject.AddComponent<BoxCollider2D>();                
         mimicCollider.size = new Vector3(1.5f, 1f, 1f);
 
