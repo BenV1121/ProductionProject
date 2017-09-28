@@ -209,8 +209,9 @@ GameObject:
   - component: {fileID: 1113677734}
   - component: {fileID: 1113677735}
   - component: {fileID: 1113677736}
+  - component: {fileID: 1113677737}
   m_Layer: 0
-  m_Name: Player
+  m_Name: FireGuy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -290,7 +291,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &1113677735
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -318,6 +319,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: {x: 1, y: 1}
+--- !u!114 &1113677737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1113677731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 257dd0880e484094188877c12ae478b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotPrefab: {fileID: 4995487973955642, guid: f78cb1ad9177d644a8f7308142a6f3f7, type: 2}
+  shootingRate: 1
 --- !u!1 &1220427454
 GameObject:
   m_ObjectHideFlags: 0

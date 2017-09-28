@@ -18,22 +18,22 @@ public class FireGuyController : MonoBehaviour
             jumpHeight = 10;
         }
 
-        Vector3 movement = new Vector3(speed.x * inputX, jumpHeight, 0);
+        Vector2 movement = new Vector3(speed.x * inputX, jumpHeight);
 
         movement *= Time.deltaTime;
 
         transform.Translate(movement);
 
-        //bool shoot = Input.GetButton("Fire1");
-        //shoot |= Input.GetButton("Fire2");
+        bool shoot = Input.GetButton("Fire1");
+        shoot |= Input.GetButton("Fire2");
 
-        //if (shoot)
-        //{
-        //    FireProjectileScript weapon = GetComponent<FireProjectileScript>();
-        //    if (weapon != null)
-        //    {
-        //        weapon.Attack(false);
-        //    }
-        //}
+        if (shoot)
+        {
+            FireProjectileScript weapon = GetComponent<FireProjectileScript>();
+            if (weapon != null)
+            {
+                weapon.Attack(false);
+            }
+        }
     }
 }

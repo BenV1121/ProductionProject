@@ -44,18 +44,18 @@ public class FireProjectileScript : MonoBehaviour
             shotTransform.position = transform.position;
 
             // The is enemy property
-            //ShotScript shot = shotTransform.gameObject.GetComponent<ShotScript>();
-            //if (shot != null)
-            //{
-            //    shot.isEnemyShot = isEnemy;
-            //}
+            ShotScript shot = shotTransform.gameObject.GetComponent<ShotScript>();
+            if (shot != null)
+            {
+                shot.isEnemyShot = isEnemy;
+            }
 
             //// Make the weapon shot always towards it
-            //MoveScript move = shotTransform.gameObject.GetComponent<MoveScript>();
-            //if (move != null)
-            //{
-            //    move.direction = this.transform.right; // towards in 2D space is the right of the sprite
-            //}
+            ProjectileMove move = shotTransform.gameObject.GetComponent<ProjectileMove>();
+            if (move != null)
+            {
+                move.direction = this.transform.right; // towards in 2D space is the right of the sprite
+            }
         }
     }
 
