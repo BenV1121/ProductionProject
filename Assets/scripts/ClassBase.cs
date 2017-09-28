@@ -28,9 +28,16 @@ public class ClassBase : MonoBehaviour {
         float xInput = Input.GetAxis("Horizontal");
         
         movement.x = xInput * control.walkSpeedMult * speed;
-        control.rb.AddForce(movement * xInput * control.walkSpeedMult);
+        control.rb.AddForce(movement, ForceMode2D.Impulse);
 
-        // JUMP
+        // Movement Clamping
+        if (control.rb.velocity.x > control.maxWalkSpeed)
+            control.rb.velocity = new Vector2(control.maxWalkSpeed, control.rb.velocity.y);
+
+        if (control.rb.velocity.x < -control.maxWalkSpeed)
+            control.rb.velocity = new Vector2(-control.maxWalkSpeed, control.rb.velocity.y);
+
+        // Jump
         if (Input.GetButton("Jump") && control.isJumping == false)
         {
             control.isJumping = true;
@@ -38,11 +45,13 @@ public class ClassBase : MonoBehaviour {
             control.rb.AddForce(Vector2.up * control.maxJumpForce, ForceMode2D.Impulse);
         }        
 
-        // ATTACK
+        // Attack
         if (Input.GetButton("Fire1"))
         {
             //does nothing for base class
         }
+
+        
     }
 
     public virtual void UpdateSprite()
@@ -68,9 +77,14 @@ public class ClassBase : MonoBehaviour {
                 
     }
 
+    public virtual void FixedUpdate()
+    {
+        HandleInput();
+    }
+
     // Update is called once per frame
     public virtual void Update () {
-        HandleInput();
+        //HandleInput();
         UpdateSprite();
 
 

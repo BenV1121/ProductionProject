@@ -35,7 +35,8 @@ public class BaseController : MonoBehaviour {
 
     // Modify walkSpeedForce in your enemy code
     public const float walkSpeed = 1f;
-    public float walkSpeedMult = 4.0f;
+    public float maxWalkSpeed = 2.5f;
+    public float walkSpeedMult = 1.0f;
 
     //The changing class which the mimic mechanic relies on
     public ClassBase playerClass;
