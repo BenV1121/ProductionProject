@@ -10,9 +10,12 @@ public class BaseController : MonoBehaviour {
     public enum PlayerState { IDLE, ATTACK, DEATH, MIMIC };
     public PlayerState playerState;
 
-    public SphereCollider myCollider;
+    public CircleCollider2D myCollider;
+
+    public Rigidbody2D rb;
 
     public bool isEnemyAI = false;
+    public bool isDead = false;
 
     //Mimic variables
     public const float mimicDuration = 10f;
@@ -20,22 +23,56 @@ public class BaseController : MonoBehaviour {
 
     //Movement variables
     public float maxJumpForce = 2f;
+
+    // Modify gravity in your enemy code
+    const float fallSpeed = 5f;
+    public float fallSpeedMult = 1.0f;
     public bool isJumping = false;
+    public bool isGrounded = false;
+
     public bool canDoubleJump = false;
-    public const ushort maxJumps = 1;
+    public ushort maxJumps = 1;
+
+    // Modify walkSpeedForce in your enemy code
+    public const float walkSpeed = 5f;
+    public float walkSpeedMult = 1.0f;
 
     //The changing class which the mimic mechanic relies on
     public ClassBase playerClass;
 
 	void Start () {
-        myCollider = GetComponent<SphereCollider>();
+        if (GetComponent<CircleCollider2D>())
+            myCollider = GetComponent<CircleCollider2D>();
+
+        if (GetComponent<Rigidbody2D>())
+            rb = GetComponent<Rigidbody2D>();
+
         playerClass = (ClassMirror)playerClass;
         playerState = PlayerState.IDLE;
+
+
     }
 	
 	void Update () {
-        
-        playerClass.Update();
+
+        if (!isDead)
+        {
+            playerClass.Update();
+        }
+
+
+
+        //Code for mimic duration. Disabled for now unless we want it back
+        //if (playerClass != (ClassMirror)playerClass)
+        //{
+        //    mimicTimer += Time.deltaTime;
+        //}
+
+        //if (mimicTimer >= mimicDuration)
+        //{
+        //    playerClass = (ClassMirror)playerClass;
+        //    mimicTimer = 0;
+        //}
 
 	}    
 }
