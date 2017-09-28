@@ -7,8 +7,12 @@ public class BaseController : MonoBehaviour {
     // PlayerController holding most of the variables needed for movement, attacking, etc.
 
     //State Machine
-    public enum PlayerState { IDLE, ATTACK, DEATH };
+    public enum PlayerState { IDLE, ATTACK, DEATH, MIMIC };
     public PlayerState playerState;
+
+    public SphereCollider myCollider;
+
+    public bool isEnemyAI = false;
 
     //Mimic variables
     public const float mimicDuration = 10f;
@@ -24,11 +28,14 @@ public class BaseController : MonoBehaviour {
     public ClassBase playerClass;
 
 	void Start () {
+        myCollider = GetComponent<SphereCollider>();
         playerClass = (ClassMirror)playerClass;
         playerState = PlayerState.IDLE;
     }
 	
 	void Update () {
+        
         playerClass.Update();
+
 	}    
 }
