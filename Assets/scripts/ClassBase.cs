@@ -12,7 +12,7 @@ public class ClassBase : MonoBehaviour {
     public BaseController control;
 
     // TODO: Sprite Animation Hookup
-   
+    public Sprite sprite;
 
     // Use this for initialization
     public virtual void Start ()
@@ -20,6 +20,11 @@ public class ClassBase : MonoBehaviour {
         if (transform.GetComponent<BaseController>())
             control = transform.GetComponent<BaseController>();
 	}
+
+    public virtual void HandleInput()
+    {
+
+    }
 
     public virtual void UpdateSprite()
     {
@@ -46,7 +51,7 @@ public class ClassBase : MonoBehaviour {
 
     // Update is called once per frame
     public virtual void Update () {
-
+        HandleInput();
         UpdateSprite();
     }
 }

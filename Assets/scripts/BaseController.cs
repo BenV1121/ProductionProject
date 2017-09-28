@@ -13,6 +13,7 @@ public class BaseController : MonoBehaviour {
     public SphereCollider myCollider;
 
     public bool isEnemyAI = false;
+    public bool isDead = false;
 
     //Mimic variables
     public const float mimicDuration = 10f;
@@ -20,22 +21,38 @@ public class BaseController : MonoBehaviour {
 
     //Movement variables
     public float maxJumpForce = 2f;
+
+    // Modify gravity in your enemy code
+    const float fallSpeed = 5f;
+    public float gravityForceMult = 1.0f;
     public bool isJumping = false;
+
     public bool canDoubleJump = false;
     public const ushort maxJumps = 1;
+
+    // Modify walkSpeedForce in your enemy code
+    const float walkSpeed = 5f;
+    public float walkSpeedForce = 1.0f;
 
     //The changing class which the mimic mechanic relies on
     public ClassBase playerClass;
 
 	void Start () {
-        myCollider = GetComponent<SphereCollider>();
+        if (GetComponent<SphereCollider>())
+            myCollider = GetComponent<SphereCollider>();
+
         playerClass = (ClassMirror)playerClass;
         playerState = PlayerState.IDLE;
     }
 	
 	void Update () {
-        
-        playerClass.Update();
+
+        if (!isDead)
+        {
+            playerClass.Update();
+        }
+
+
 
 	}    
 }

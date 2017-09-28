@@ -13,17 +13,16 @@ public class ClassMirror : ClassBase {
 		
 	}    
 
-    public void HandleInput()
+    override public void HandleInput()
     {
         // MOVEMENT
-        //if colliding == true 
-        //&& collider.gameObject.getcomponentnt<baseController>().playerClass == ClassRockGuy
-        //&& collider.gameObject.getcomponentnt<baseController>().playerState == PlayerState.ATTACK
+
 
         // JUMP
         if (Input.GetButton("Jump"))
         {
             // Do jump
+
         }
 
         // ATTACK
@@ -50,8 +49,7 @@ public class ClassMirror : ClassBase {
         if (control.isEnemyAI)
         {
             // do AI stuff
-
-
+            // Mirror doesn't have AI (maybe)
         }
 
         else
@@ -59,6 +57,9 @@ public class ClassMirror : ClassBase {
             // do playerInput stuff
             HandleInput();
         }       
+
+        // Handle Death
+
 
     }
 }
