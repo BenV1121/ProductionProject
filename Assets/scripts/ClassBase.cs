@@ -56,11 +56,7 @@ public class ClassBase : MonoBehaviour {
         if (control.rb.velocity.x < -control.maxWalkSpeed)
             control.rb.velocity = new Vector2(-control.maxWalkSpeed, control.rb.velocity.y);
 
-        //Jump
-        if (Input.GetButton("Jump"))
-        {
-            HandleJump();
-        }
+
 
         if (control.isJumping == true && Input.GetKeyDown(KeyCode.Space))
         {
@@ -103,6 +99,12 @@ public class ClassBase : MonoBehaviour {
     public virtual void FixedUpdate()
     {
         HandleInput();
+
+        //Jump
+        if (Input.GetButton("Jump"))
+        {
+            HandleJump();
+        }
     }
 
     // Update is called once per frame
