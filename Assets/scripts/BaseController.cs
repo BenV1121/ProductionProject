@@ -10,17 +10,9 @@ public class BaseController : MonoBehaviour {
     public enum PlayerState { IDLE, ATTACK, DEATH, MIMIC };
     public PlayerState playerState;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    public SphereCollider myCollider;
-=======
-    public CircleCollider2D myCollider;
->>>>>>> Keil
-=======
     public CircleCollider2D myCollider;
 
     public Rigidbody2D rb;
->>>>>>> a867e4309f8c1d30788539e9a78b2c71b5351f98
 
     public bool isEnemyAI = false;
     public bool isDead = false;
@@ -50,21 +42,19 @@ public class BaseController : MonoBehaviour {
     public ClassBase playerClass;
 
 	void Start () {
-<<<<<<< HEAD
-<<<<<<< HEAD
-        myCollider = GetComponent<SphereCollider>();
-=======
         myCollider = GetComponent<CircleCollider2D>();
->>>>>>> Keil
-=======
+
         if (GetComponent<CircleCollider2D>())
             myCollider = GetComponent<CircleCollider2D>();
 
         if (GetComponent<Rigidbody2D>())
             rb = GetComponent<Rigidbody2D>();
 
->>>>>>> a867e4309f8c1d30788539e9a78b2c71b5351f98
-        playerClass = (ClassMirror)playerClass;
+        if (!isEnemyAI)
+        {
+            playerClass = (ClassMirror)playerClass;
+        }
+
         playerState = PlayerState.IDLE;
 
 

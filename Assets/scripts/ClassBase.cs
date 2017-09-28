@@ -7,6 +7,9 @@ public class ClassBase : MonoBehaviour {
     // The base class that all other player controllable classes should inherit from.        
     // See ClassMirror for example of inheritance.
 
+    public float HitDist = 1.2f;    
+    RaycastHit2D[] hits;
+
     //The player controller. Use this to access/modify variables.
     public BaseController control;
 
@@ -22,6 +25,23 @@ public class ClassBase : MonoBehaviour {
         speed = BaseController.walkSpeed;
     }
 
+    public virtual void HandleJump()
+    {
+        hits = Physics2D.RaycastAll(transform.position, -transform.up, HitDist);
+        for (int i = 0; i < hits.Length; i++)
+        {
+            if (hits != null && hits[i] != hits[i].collider.gameObject.tag.Equals("Player"))
+            {
+                Debug.Log(hits[i].collider.gameObject.name);
+                control.isJumping = true;
+            }
+            else
+            {
+                control.isJumping = false;
+            }
+        }
+    }
+
     public virtual void HandleInput()
     {
         // Basic Horizontal movement
@@ -33,17 +53,20 @@ public class ClassBase : MonoBehaviour {
         // Movement Clamping
         if (control.rb.velocity.x > control.maxWalkSpeed)
             control.rb.velocity = new Vector2(control.maxWalkSpeed, control.rb.velocity.y);
-
         if (control.rb.velocity.x < -control.maxWalkSpeed)
             control.rb.velocity = new Vector2(-control.maxWalkSpeed, control.rb.velocity.y);
 
-        // Jump
-        if (Input.GetButton("Jump") && control.isJumping == false)
+        //Jump
+        if (Input.GetButton("Jump"))
         {
-            control.isJumping = true;
-            control.isGrounded = false;
+            HandleJump();
+        }
+
+        if (control.isJumping == true && Input.GetKeyDown(KeyCode.Space))
+        {
             control.rb.AddForce(Vector2.up * control.maxJumpForce, ForceMode2D.Impulse);
-        }        
+
+        }
 
         // Attack
         if (Input.GetButton("Fire1"))
