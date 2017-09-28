@@ -221,8 +221,9 @@ GameObject:
   - component: {fileID: 1113677732}
   - component: {fileID: 1113677734}
   - component: {fileID: 1113677735}
-  - component: {fileID: 1113677736}
   - component: {fileID: 1113677737}
+  - component: {fileID: 1113677738}
+  - component: {fileID: 1113677736}
   m_Layer: 0
   m_Name: FireGuy
   m_TagString: Untagged
@@ -328,10 +329,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1113677731}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4af1f2a499b68aa46926fb506cb97ca2, type: 3}
+  m_Script: {fileID: 11500000, guid: 6952d7fbaa6c77942bbc0abebee5986f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: {x: 1, y: 1}
+  playerState: 0
+  myCollider: {fileID: 0}
+  rb: {fileID: 0}
+  isEnemyAI: 0
+  isDead: 0
+  mimicTimer: 0
+  maxJumpForce: 2
+  fallSpeedMult: 1
+  isJumping: 0
+  isGrounded: 0
+  canDoubleJump: 0
+  maxJumps: 1
+  walkSpeedMult: 1
+  playerClass: {fileID: 0}
 --- !u!114 &1113677737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,6 +359,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotPrefab: {fileID: 4995487973955642, guid: f78cb1ad9177d644a8f7308142a6f3f7, type: 2}
   shootingRate: 1
+--- !u!114 &1113677738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1113677731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b264ab8f9188b6e4a93541956674dcd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  control: {fileID: 1113677736}
+  sprite: {fileID: 0}
+  control: {fileID: 0}
+  sprite: {fileID: 0}
 --- !u!1 &1220427454
 GameObject:
   m_ObjectHideFlags: 0
