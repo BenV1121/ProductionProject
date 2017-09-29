@@ -65,9 +65,10 @@ public class ClassBase : MonoBehaviour {
         }
 
         // Attack
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire2"))
         {
-            //does nothing for base class
+            // Switch back to Mirror if not a mirror
+            // and discard current class
         }
 
         

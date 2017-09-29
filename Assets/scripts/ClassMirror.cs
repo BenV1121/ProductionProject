@@ -49,12 +49,11 @@ public class ClassMirror : ClassBase {
 
             if (otherClass != null)
             {
-                //otherType = otherClass.GetType();
-                gameObject.AddComponent(otherClass.GetType());
+                control.playerClass = gameObject.AddComponent(otherClass.GetType()) as ClassBase;            
+
                 Destroy(otherClass.gameObject);
                 Destroy(this);
-            } 
-            
+            }             
         }
 
         // ATTACK
@@ -78,10 +77,9 @@ public class ClassMirror : ClassBase {
         {
             // do playerInput stuff
             HandleInput();
-        }       
+        }
 
         // Handle Death
-
 
     }
 }

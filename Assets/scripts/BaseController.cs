@@ -40,6 +40,7 @@ public class BaseController : MonoBehaviour {
 
     //The changing class which the mimic mechanic relies on
     public ClassBase playerClass;
+    
 
 	void Start () {
         myCollider = GetComponent<CircleCollider2D>();
@@ -50,7 +51,7 @@ public class BaseController : MonoBehaviour {
         if (GetComponent<Rigidbody2D>())
             rb = GetComponent<Rigidbody2D>();
 
-        if (!isEnemyAI)
+        if (!isEnemyAI || playerClass == null)
         {
             playerClass = (ClassMirror)playerClass;
         }
@@ -69,17 +70,18 @@ public class BaseController : MonoBehaviour {
 
 
 
-        //Code for mimic duration. Disabled for now unless we want it back
-        //if (playerClass != (ClassMirror)playerClass)
-        //{
-        //    mimicTimer += Time.deltaTime;
-        //}
-
-        //if (mimicTimer >= mimicDuration)
-        //{
-        //    playerClass = (ClassMirror)playerClass;
-        //    mimicTimer = 0;
-        //}
+        //Code to shed away mimic and go back to mirror.
+        if (!isEnemyAI)
+        {
+            if (!(playerClass is ClassMirror))
+            {
+                if (Input.GetButton("Fire2"))
+                {
+                    //Destroy(playerClass);
+                    playerClass = gameObject.AddComponent<ClassMirror>();
+                }
+            }
+        }
 
 	}    
 }

@@ -8,8 +8,10 @@ using UnityEngine;
 
 public class ClassSlowGuy : ClassBase {        
 
-	// Use this for initialization
-	override public void Start ()
+    
+
+    // Use this for initialization
+    override public void Start ()
     {
         base.Start();                
     }
