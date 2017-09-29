@@ -32,17 +32,22 @@ public class ClassBase : MonoBehaviour {
 
     public virtual void HandleJump()
     {
+        if (control.isGrounded == true && Input.GetKeyDown(KeyCode.Space))
+        {
+            control.rb.AddForce(Vector2.up * control.maxJumpForce, ForceMode2D.Impulse);
+        }
+
         hits = Physics2D.RaycastAll(transform.position, -transform.up, HitDist);
         for (int i = 0; i < hits.Length; i++)
         {
             if (hits != null && hits[i] != hits[i].collider.gameObject.tag.Equals("Player"))
             {
                 Debug.Log(hits[i].collider.gameObject.name);
-                control.isJumping = true;
+                control.isGrounded = true;
             }
             else
             {
-                control.isJumping = false;
+                control.isGrounded = false;
             }
         }
     }
@@ -63,10 +68,7 @@ public class ClassBase : MonoBehaviour {
             if (control.rb.velocity.x < -control.maxWalkSpeed)
                 control.rb.velocity = new Vector2(-control.maxWalkSpeed, control.rb.velocity.y);
 
-            if (control.isJumping == true && Input.GetKeyDown(KeyCode.Space))
-            {
-                control.rb.AddForce(Vector2.up * control.maxJumpForce, ForceMode2D.Impulse);
-            }
+
         }        
     }
 
