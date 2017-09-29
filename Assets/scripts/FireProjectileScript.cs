@@ -11,6 +11,8 @@ public class FireProjectileScript : MonoBehaviour
     /// Cooldown in seconds between two shots
     public float shootingRate = 0.25f;
 
+    public bool shotFlip = false;
+
     // Cooldown
 
     private float shootCooldown;
@@ -26,6 +28,22 @@ public class FireProjectileScript : MonoBehaviour
         {
             shootCooldown -= Time.deltaTime;
         }
+
+        BaseController bc = GetComponent<BaseController>();
+
+        if(bc.isEnemyAI == false)
+        {
+            if (Input.GetKey(KeyCode.A))
+            {
+                shotFlip = true;
+            }
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                shotFlip = false;
+            }
+        }
+        
     }
 
     // 3hooting from another script
@@ -41,6 +59,7 @@ public class FireProjectileScript : MonoBehaviour
             var shotTransform = Instantiate(shotPrefab) as Transform;
 
             // Assign position
+
             shotTransform.position = transform.position;
 
             // The is enemy property
@@ -54,7 +73,12 @@ public class FireProjectileScript : MonoBehaviour
             ProjectileMove move = shotTransform.gameObject.GetComponent<ProjectileMove>();
             if (move != null)
             {
-                move.direction = this.transform.right; // towards in 2D space is the right of the sprite
+                move.direction = this.transform.right;
+
+                if(shotFlip == true)
+                {
+                    move.direction = -this.transform.right;
+                }
             }
         }
     }

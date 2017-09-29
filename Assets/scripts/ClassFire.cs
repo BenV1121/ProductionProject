@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class ClassFire : ClassBase
 {
-
-    //The player controller. Use this to access/modify variables.
-    public BaseController control;
-
-    // TODO: Sprite Animation Hookup
-    public Sprite sprite;
-
     // Use this for initialization
     public override void Start()
     {
@@ -20,7 +13,18 @@ public class ClassFire : ClassBase
 
     public override void HandleInput()
     {
+        base.HandleInput();
 
+        bool shoot = Input.GetButton("Fire1");
+
+        if (shoot)
+        {
+            FireProjectileScript weapon = GetComponent<FireProjectileScript>();
+            if (weapon != null)
+            {
+                weapon.Attack(false);
+            }
+        }
     }
 
     public override void UpdateSprite()
@@ -44,5 +48,56 @@ public class ClassFire : ClassBase
                 break;
         }
 
+    }
+
+    // Update is called once per frame
+    override public void Update()
+    {
+
+        //If this is an enemy AI, 
+        if (control.isEnemyAI)
+        {
+
+        }
+
+        else
+        {
+            // do playerInput stuff
+            HandleInput();
+        }
+
+        // Handle Death
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        FireProjectileScript weapon = GetComponent<FireProjectileScript>();
+
+        if (other.gameObject.tag == "Player")
+        {
+            weapon.Attack(true);
+
+            Debug.Log("hi");
+        }
+    }
+
+    public void OnTriggerStay2D(Collider2D other)
+    {
+        FireProjectileScript weapon = GetComponent<FireProjectileScript>();
+
+        if (other.gameObject.tag == "Player")
+        {
+            weapon.Attack(true);
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        FireProjectileScript weapon = GetComponent<FireProjectileScript>();
+
+        if (other.gameObject.tag == "Player")
+        {
+            weapon = null;
+        }
     }
 }
