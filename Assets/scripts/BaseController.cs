@@ -96,18 +96,15 @@ public class BaseController : MonoBehaviour {
         }
 
         //Code to shed away mimic and go back to mirror.
-        if (!isEnemyAI)
+        if (isEnemyAI == false)
         {
-            if (!(playerClass is ClassMirror) && playerState != PlayerState.MIMIC)
+            if (Input.GetButton("Fire2"))
             {
-                if (Input.GetButton("Fire2"))
-                {
-                    if (Input.GetButtonUp("Fire2"))
-                    {
-                        Destroy(playerClass);
-                        playerClass = gameObject.AddComponent<ClassMirror>();
-                    }
-                    
+                if (!gameObject.GetComponent<ClassMirror>()
+                && playerState != PlayerState.MIMIC)
+                {                  
+                    Destroy(playerClass);
+                    playerClass = gameObject.AddComponent<ClassMirror>();                    
                 }
             }
         }

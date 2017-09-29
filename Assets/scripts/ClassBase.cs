@@ -16,14 +16,18 @@ public class ClassBase : MonoBehaviour {
 
     // TODO: Sprite Animation Hookup
     public Sprite sprite;
-    float speed;
-    Vector2 movement = new Vector2(0,0);
+    public float speed;
+    public Vector2 movement = new Vector2(0,0);
 
     // Use this for initialization
     public virtual void Start ()
-    {        
+    {
         control = transform.GetComponent<BaseController>();
         speed = BaseController.walkSpeed;
+
+        control.maxWalkSpeed = 2.5f;
+        control.walkSpeedMult = 1.0f;
+        control.maxJumpForce = 5f;
     }
 
     public virtual void HandleJump()
@@ -63,12 +67,6 @@ public class ClassBase : MonoBehaviour {
             {
                 control.rb.AddForce(Vector2.up * control.maxJumpForce, ForceMode2D.Impulse);
             }
-
-            //// Attack
-            //if (Input.GetButton("Fire2"))
-            //{
-            //    control.playerState = BaseController.PlayerState.MIMIC;
-            //}
         }        
     }
 

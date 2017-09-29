@@ -162,6 +162,8 @@ MonoBehaviour:
   isEnemyAI: 0
   isDead: 0
   mimicTimer: 0
+  attackCooldownTime: 1.5
+  attackTimer: 0
   maxJumpForce: 2
   fallSpeedMult: 1
   isJumping: 0
@@ -365,6 +367,8 @@ MonoBehaviour:
   isEnemyAI: 1
   isDead: 0
   mimicTimer: 0
+  attackCooldownTime: 1.5
+  attackTimer: 0
   maxJumpForce: 2
   fallSpeedMult: 1
   isJumping: 0
@@ -616,6 +620,8 @@ MonoBehaviour:
   isEnemyAI: 1
   isDead: 0
   mimicTimer: 0
+  attackCooldownTime: 1.5
+  attackTimer: 0
   maxJumpForce: 2
   fallSpeedMult: 1
   isJumping: 0
