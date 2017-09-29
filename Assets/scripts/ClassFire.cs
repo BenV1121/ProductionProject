@@ -57,7 +57,7 @@ public class ClassFire : ClassBase
         //If this is an enemy AI, 
         if (control.isEnemyAI)
         {
-            // do AI stuff
+
         }
 
         else
@@ -67,7 +67,37 @@ public class ClassFire : ClassBase
         }
 
         // Handle Death
+    }
 
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        FireProjectileScript weapon = GetComponent<FireProjectileScript>();
 
+        if (other.gameObject.tag == "Player")
+        {
+            weapon.Attack(true);
+
+            Debug.Log("hi");
+        }
+    }
+
+    public void OnTriggerStay2D(Collider2D other)
+    {
+        FireProjectileScript weapon = GetComponent<FireProjectileScript>();
+
+        if (other.gameObject.tag == "Player")
+        {
+            weapon.Attack(true);
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        FireProjectileScript weapon = GetComponent<FireProjectileScript>();
+
+        if (other.gameObject.tag == "Player")
+        {
+            weapon = null;
+        }
     }
 }
