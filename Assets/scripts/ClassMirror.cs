@@ -69,11 +69,6 @@ public class ClassMirror : ClassBase {
         }
     }
 
-    public override void FixedUpdate()
-    {
-        base.FixedUpdate();
-    }
-
     public override void Update()
     {
         base.Update();

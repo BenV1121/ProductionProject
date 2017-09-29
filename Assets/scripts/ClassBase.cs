@@ -89,13 +89,14 @@ public class ClassBase : MonoBehaviour {
             case BaseController.PlayerState.MIMIC:
                 //mimic sprite
                 break;
-        }
-                
+        }                
     }
 
-    // Physics based stuff should use this
-    public virtual void FixedUpdate()
-    {
+    // Update is called once per frame
+    public virtual void Update () {
+        
+        UpdateSprite();
+
         if (control.isEnemyAI == false)
         {
             //Basic movement
@@ -107,12 +108,6 @@ public class ClassBase : MonoBehaviour {
                 HandleJump();
             }
         }
-    }
 
-    // Update is called once per frame
-    public virtual void Update () {
-        
-        UpdateSprite();
-        
     }
 }
