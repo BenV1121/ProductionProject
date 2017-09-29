@@ -26,7 +26,7 @@ public class BaseController : MonoBehaviour {
     public float attackTimer = 0f;
 
     //Movement variables
-    public float maxJumpForce = 5f;
+    public float maxJumpForce = 2f;
     const float fallSpeed = 5f;
     public float fallSpeedMult = 1.0f;
     public bool isJumping = false;

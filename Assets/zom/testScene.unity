@@ -545,7 +545,6 @@ GameObject:
   - component: {fileID: 1098277528}
   - component: {fileID: 1098277530}
   - component: {fileID: 1098277529}
-  - component: {fileID: 1098277534}
   m_Layer: 0
   m_Name: FireGuy
   m_TagString: Untagged
@@ -697,20 +696,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1098277534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1098277527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 257dd0880e484094188877c12ae478b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shotPrefab: {fileID: 4488664927358038, guid: ef08253b8161b794e927a73f5c3f6751, type: 2}
-  shootingRate: 0.25
-  shotFlip: 0
 --- !u!1 &1109088889
 GameObject:
   m_ObjectHideFlags: 0

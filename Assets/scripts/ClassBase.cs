@@ -27,7 +27,7 @@ public class ClassBase : MonoBehaviour {
 
         control.maxWalkSpeed = 2.5f;
         control.walkSpeedMult = 1.0f;
-        control.maxJumpForce = 5f;
+        control.maxJumpForce = 2f;
     }
 
     public virtual void HandleJump()
