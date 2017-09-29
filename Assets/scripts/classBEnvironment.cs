@@ -15,7 +15,7 @@ public class classBEnvironment : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    void onCollisionEnter(Collision collider)
+    void OnTriggerEnter2D(Collider2D collider)
     {
         //If the wall is rock and is attacked by a rock dude, destroy it
         //New ClassBase() is a place holder, replace it with the Rock man class that aaron is working on.
