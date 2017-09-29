@@ -7,6 +7,7 @@ public class ClassBase : MonoBehaviour {
     // The base class that all other player controllable classes should inherit from.        
     // See ClassMirror for example of inheritance.
 
+    // Ground Checks
     public float HitDist = 1.2f;    
     RaycastHit2D[] hits;
 
@@ -44,34 +45,31 @@ public class ClassBase : MonoBehaviour {
 
     public virtual void HandleInput()
     {
-        // Basic Horizontal movement
-        float xInput = Input.GetAxis("Horizontal");
-        
-        movement.x = xInput * control.walkSpeedMult * speed;
-        control.rb.AddForce(movement, ForceMode2D.Impulse);
-
-        // Movement Clamping
-        if (control.rb.velocity.x > control.maxWalkSpeed)
-            control.rb.velocity = new Vector2(control.maxWalkSpeed, control.rb.velocity.y);
-        if (control.rb.velocity.x < -control.maxWalkSpeed)
-            control.rb.velocity = new Vector2(-control.maxWalkSpeed, control.rb.velocity.y);
-
-
-
-        if (control.isJumping == true && Input.GetKeyDown(KeyCode.Space))
+        if (control.isEnemyAI == false)
         {
-            control.rb.AddForce(Vector2.up * control.maxJumpForce, ForceMode2D.Impulse);
+            // Horizontal movement
+            float xInput = Input.GetAxis("Horizontal");
 
-        }
+            movement.x = xInput * control.walkSpeedMult * speed;
+            control.rb.AddForce(movement, ForceMode2D.Impulse);
 
-        // Attack
-        if (Input.GetButton("Fire2"))
-        {
-            // Switch back to Mirror if not a mirror
-            // and discard current class
-        }
+            // Movement Speed Clamp
+            if (control.rb.velocity.x > control.maxWalkSpeed)
+                control.rb.velocity = new Vector2(control.maxWalkSpeed, control.rb.velocity.y);
+            if (control.rb.velocity.x < -control.maxWalkSpeed)
+                control.rb.velocity = new Vector2(-control.maxWalkSpeed, control.rb.velocity.y);
 
-        
+            if (control.isJumping == true && Input.GetKeyDown(KeyCode.Space))
+            {
+                control.rb.AddForce(Vector2.up * control.maxJumpForce, ForceMode2D.Impulse);
+            }
+
+            //// Attack
+            //if (Input.GetButton("Fire2"))
+            //{
+            //    control.playerState = BaseController.PlayerState.MIMIC;
+            //}
+        }        
     }
 
     public virtual void UpdateSprite()
@@ -97,34 +95,26 @@ public class ClassBase : MonoBehaviour {
                 
     }
 
+    // Physics based stuff should use this
     public virtual void FixedUpdate()
     {
-        HandleInput();
-
-        //Jump
-        if (Input.GetButton("Jump"))
+        if (control.isEnemyAI == false)
         {
-            HandleJump();
+            //Basic movement
+            HandleInput();
+
+            //Jump
+            if (Input.GetButton("Jump"))
+            {
+                HandleJump();
+            }
         }
     }
 
     // Update is called once per frame
     public virtual void Update () {
-        //HandleInput();
+        
         UpdateSprite();
-
-
-        // GO back to after doing actions if not doing anything
-        switch (control.playerState)
-        {
-            case BaseController.PlayerState.ATTACK:
-                //go back to idle after certain time
-                break;
-
-            case BaseController.PlayerState.MIMIC:
-                //go back to idle after certain time
-                break;
-        }
-
+        
     }
 }

@@ -6,14 +6,15 @@ using UnityEngine;
 // A slow enemy that doesn't do anything except move slowly
 ////////////////////////////////////////////////////////////////
 
-public class ClassSlowGuy : ClassBase {        
-
-    
+public class ClassSlowGuy : ClassBase {            
 
     // Use this for initialization
     override public void Start ()
     {
-        base.Start();                
+        base.Start();
+
+        control.maxWalkSpeed = 1.25f;
+        control.walkSpeedMult = .95f;
     }
 
     void OnCollisionEnter2D(Collision2D other)

@@ -63,23 +63,13 @@ public class ClassMirror : ClassBase {
         }
     }
 
-    // Update is called once per frame
-    override public void Update () {
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+    }
 
-        //If this is an enemy AI, 
-        if (control.isEnemyAI)
-        {
-            // do AI stuff
-            // Mirror doesn't have AI (maybe)
-        }
-
-        else
-        {
-            // do playerInput stuff
-            HandleInput();
-        }
-
-        // Handle Death
-
+    public override void Update()
+    {
+        base.Update();
     }
 }
