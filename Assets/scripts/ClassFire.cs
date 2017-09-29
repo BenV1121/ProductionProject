@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class ClassFire : ClassBase
 {
+    FireProjectileScript fps;
+
     // Use this for initialization
     public override void Start()
     {
         if (transform.GetComponent<BaseController>())
             control = transform.GetComponent<BaseController>();
+
+        fps = gameObject.AddComponent<FireProjectileScript>();
     }
 
     public override void HandleInput()
