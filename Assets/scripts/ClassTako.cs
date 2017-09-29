@@ -8,14 +8,12 @@ public class ClassTako : ClassBase {
     public Rigidbody2D rb;
     float tempdt = 0f;
     RaycastHit2D[] hit;
-    float startTime;
-    float elapsedTime;
+    float startTime = 0.0f;
+    float currentBTime;
 
     // Use this for initialization
     public override void Start()
     {
-         startTime = Time.deltaTime;
-
         control.isJumping = false;
         control.maxJumpForce = 5f;
 
@@ -59,13 +57,15 @@ public class ClassTako : ClassBase {
             //}
             if (control.isGrounded == true && Input.GetKeyDown(KeyCode.Space))
             {
-                elapsedTime = Time.time - startTime;
+                currentBTime = Time.time;
+
                 Debug.Log("Charging...");
             }
             if(control.isGrounded == true && Input.GetKeyUp(KeyCode.Space))
             {
-                    rb.AddForce(Vector2.up * control.maxJumpForce , ForceMode2D.Impulse);
-                    control.isJumping = true;
+                rb.AddForce(Vector2.up * control.maxJumpForce * (Time.time - currentBTime), ForceMode2D.Impulse);
+                control.isJumping = true;
+          
                 Debug.Log("JAAAUP...");
             }
 
