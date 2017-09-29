@@ -10,6 +10,8 @@ public class ClassBase : MonoBehaviour {
     public float HitDist = 1.2f;    
     RaycastHit2D[] hits;
 
+ 
+
     //The player controller. Use this to access/modify variables.
     public BaseController control;
 
@@ -33,11 +35,11 @@ public class ClassBase : MonoBehaviour {
             if (hits != null && hits[i] != hits[i].collider.gameObject.tag.Equals("Player"))
             {
                 Debug.Log(hits[i].collider.gameObject.name);
-                control.isJumping = true;
+                control.isGrounded = true;
             }
             else
             {
-                control.isJumping = false;
+                control.isGrounded = false;
             }
         }
     }
@@ -58,7 +60,7 @@ public class ClassBase : MonoBehaviour {
 
 
 
-        if (control.isJumping == true && Input.GetKeyDown(KeyCode.Space))
+        if (control.isGrounded == true && Input.GetKeyDown(KeyCode.Space))
         {
             control.rb.AddForce(Vector2.up * control.maxJumpForce, ForceMode2D.Impulse);
 

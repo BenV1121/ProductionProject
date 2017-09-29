@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class ClassTako : ClassBase {
 
-    public float HitDistance = 1.2f;
+    public float HitDistance;
     public Rigidbody2D rb;
     float tempdt = 0f;
     RaycastHit2D[] hit;
     float startTime = 0.0f;
     float currentBTime;
+    float jumpForce;
+
+    //for max height of charged jump
+    public float maxVelocity;
 
     // Use this for initialization
     public override void Start()
     {
         control.isJumping = false;
-        control.maxJumpForce = 5f;
-
+        control.maxJumpForce = 3f;
+        
         rb = GetComponent<Rigidbody2D>();
+
 
     }
 	
@@ -34,42 +39,48 @@ public class ClassTako : ClassBase {
                     Debug.Log(hit[i].collider.gameObject.name);
                     control.isGrounded = true;
                    
-                    control.isJumping = false;
 
                 }
-                else if(control.isJumping == true)
+                else
                 {
                     control.isGrounded = false;
+                   
+
                 }
+                
             }
             Debug.DrawRay(transform.position, -transform.up * HitDistance, Color.red);
 
+        
 
-
-            //RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
-            //if(hit.collider != null)
-            //{
-            //    float distance = Mathf.Abs(hit.point.y - transform.position.y);
-            //    float heightError = floatHeight - distance;
-            //    // float force = lifeForce * heightError - rb.velocity.y * damping
-            //    return hit;
-
-            //}
             if (control.isGrounded == true && Input.GetKeyDown(KeyCode.Space))
             {
                 currentBTime = Time.time;
-
                 Debug.Log("Charging...");
             }
-            if(control.isGrounded == true && Input.GetKeyUp(KeyCode.Space))
+            if (control.isGrounded == true && Input.GetKeyUp(KeyCode.Space) )
             {
-                rb.AddForce(Vector2.up * control.maxJumpForce * (Time.time - currentBTime), ForceMode2D.Impulse);
-                control.isJumping = true;
-          
-                Debug.Log("JAAAUP...");
-            }
+                jumpForce = Time.time - currentBTime;
 
-            
+                if ((jumpForce < 1))
+                {
+                    rb.AddForce(Vector2.up * control.maxJumpForce, ForceMode2D.Impulse);
+                    Debug.Log("JAAAUP...");
+                   jumpForce = 0;
+                }
+                else 
+                {  
+                    rb.AddForce(Vector2.up * control.maxJumpForce * 2f, ForceMode2D.Impulse);
+                    Debug.Log("maxy");
+                    jumpForce = 0;
+
+                }
+
+            }
+          
+
+
         }
+        Debug.Log(jumpForce);
 	}
 }
