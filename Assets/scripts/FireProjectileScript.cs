@@ -22,7 +22,11 @@ public class FireProjectileScript : MonoBehaviour
     void Start()
     {
         shootCooldown = 0f;
+<<<<<<< HEAD
         bc = GetComponent<BaseController>();
+=======
+
+>>>>>>> dev
         cfBuddyFriend = gameObject.GetComponent<ClassFire>();
         if (cfBuddyFriend.control.isEnemyAI)
         {
