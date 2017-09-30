@@ -11,7 +11,9 @@ public class ClassFire : ClassBase
     public override void Start()
     {
         base.Start();
-        fireRange = gameObject.AddComponent<CircleCollider2D>();
+        if (control.isEnemyAI == true)
+            fireRange = gameObject.AddComponent<CircleCollider2D>();
+
         if (transform.GetComponent<BaseController>())
             control = transform.GetComponent<BaseController>();
 
