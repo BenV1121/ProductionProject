@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class Rock_Enemy : ClassBase {
 
-    enum STATE {MOVE_LEFT, MOVE_RIGHT, STAND_STILL, LANDING}
+    enum STATE {MOVE_LEFT, MOVE_RIGHT, STAND_STILL, LANDING, REEL_BACK, ATTACK }
 
-
-    STATE curr_state = STATE.STAND_STILL;
+    STATE curr_state;
     float curr_time;
     bool hasHopped;
     public float end_time_landing = 0.25f, end_jump_height = 2.0f, end_scale_y, end_image_y;
-    Rigidbody rb;
-    Shader shader_handle;
-    public Texture image_idle, image_jump, image_land;
+    Rigidbody2D rb;
+    BoxCollider2D rock_collider;
+    SpriteRenderer rend;
+    public Sprite image_idle, image_jump, image_land, image_reel_back, image_punch;
 
     // Use this for initialization
-    public override void Start() {
+    public override void Start()
+    {
+        curr_state = STATE.STAND_STILL;
         hasHopped = false;
-        rb = GetComponent<Rigidbody>();
-        shader_handle = GetComponent<Shader>();
+        rb = GetComponent<Rigidbody2D>();
+        rock_collider = GetComponent<BoxCollider2D>();
+        rend = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -29,6 +32,17 @@ public class Rock_Enemy : ClassBase {
         {
             hasHopped = false;
             curr_state = STATE.LANDING;
+            rend.sprite = image_land;
+            if (rend.flipX)
+            {
+                rock_collider.offset = new Vector2(-1.16f, -1.6f);
+                rock_collider.size = new Vector2(19.01f, 8.5f);
+            }
+            else
+            {
+                rock_collider.offset = new Vector2(1.6f, -1.6f);
+                rock_collider.size = new Vector2(19.01f, 8.5f);
+            }
         }
 
         if (curr_state != STATE.STAND_STILL)
@@ -40,6 +54,17 @@ public class Rock_Enemy : ClassBase {
                 {
                     curr_time = 0;
                     curr_state = STATE.STAND_STILL;
+                    rend.sprite = image_idle;
+                    if (rend.flipX)
+                    {
+                        rock_collider.offset = new Vector2(1.77f, 1.87f);
+                        rock_collider.size = new Vector2(12.1f, 8.69f);
+                    }
+                    else
+                    {
+                        rock_collider.offset = new Vector2(-1.69f, -1.73f);
+                        rock_collider.size = new Vector2(14.15f, 8.69f);
+                    }
                 }
             }
         }
@@ -50,16 +75,29 @@ public class Rock_Enemy : ClassBase {
                 curr_state = STATE.MOVE_RIGHT;
                 rb.velocity = new Vector3(-1, 3, 0);
                 hasHopped = true;
-                //GetComponent<Renderer>().SetTexture(shader_handle.name, image_jump);
-                
+                rend.flipX = false;
+                rend.sprite = image_jump;
+                rock_collider.offset = new Vector2(-3.2f, 1.87f);
+                rock_collider.size = new Vector2(14.15f, 13.09f);
             }
             if (Input.GetKey(KeyCode.D))
             {
                 curr_state = STATE.MOVE_LEFT;
                 rb.velocity = new Vector3(1, 3, 0);
                 hasHopped = true;
-                //texture_handle.
+                rend.flipX = true;
+                rend.sprite = image_jump;
+                rock_collider.offset = new Vector2(-3.2f, 1.87f);
+                rock_collider.size = new Vector2(14.15f, 13.09f);
             }
+        }
+        else if(Input.GetKey(KeyCode.Space))
+        {
+            curr_state = STATE.REEL_BACK;
+            rb.velocity = new Vector3(1, 3, 0);
+            hasHopped = true;
+            rend.flipX = true;
+            rend.sprite = image_jump;
         }
     }
 

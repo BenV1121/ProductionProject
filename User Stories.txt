@@ -1,9 +1,0 @@
-9/28/17
-
-The player gets close to an enemy and copies its form, becoming that enemy and being able to use its abilities.
-
-The player punches through a rock wall as the rock enemy.
-
-The player burns down a tree by throwing fireballs as the fire enemy.
-
-The player charges a super jump as the octopus enemy to climb a cliff.
