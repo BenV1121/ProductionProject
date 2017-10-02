@@ -5,10 +5,7 @@ using UnityEngine;
 public class ClassFire : ClassBase
 {
     FireProjectileScript fps;
-<<<<<<< HEAD
     CircleCollider2D fireRange;
-=======
->>>>>>> dev
 
     // Use this for initialization
     public override void Start()
@@ -21,11 +18,10 @@ public class ClassFire : ClassBase
             control = transform.GetComponent<BaseController>();
 
         fps = gameObject.AddComponent<FireProjectileScript>();
-<<<<<<< HEAD
+
         fireRange.isTrigger = true;
         fireRange.radius = 1f;
-=======
->>>>>>> dev
+
     }
 
     public override void HandleInput()
