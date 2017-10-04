@@ -29,8 +29,10 @@ public class classBEnvironment : MonoBehaviour {
         //if the wall is wood and is hit by a fireball destroy it
         if(thiswallis == walltyp.WOOD &&
            collider.gameObject.tag == "FireBall")
+           //collider.gameObject.GetComponent<ShotScript>())
+           
         {
             breakMe();
         }
-    }
+    }    
 }

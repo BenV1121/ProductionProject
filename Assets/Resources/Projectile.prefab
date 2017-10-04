@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 58984168775575796}
   - component: {fileID: 114909596020137290}
   - component: {fileID: 114573518144047618}
+  - component: {fileID: 58368279407466218}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: FireBall
@@ -37,12 +38,27 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1637856437714668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.763145, y: 0.5517598, z: -12.446167}
-  m_LocalScale: {x: 0.4073189, y: 0.4073189, z: 0.4073189}
+  m_LocalPosition: {x: 3.763145, y: 0.5517598, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &58368279407466218
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1637856437714668}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.1
 --- !u!58 &58984168775575796
 CircleCollider2D:
   m_ObjectHideFlags: 1

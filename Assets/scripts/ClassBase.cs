@@ -8,9 +8,10 @@ public class ClassBase : MonoBehaviour {
     // See ClassMirror for example of inheritance.
 
     // Ground Checks
-    public float HitDist = 1.2f;    
+    public float HitDist = 0.02f;    
     public RaycastHit2D[] hits;
     public ContactFilter2D groundContacts;
+    public float lastDistance;
 
     //The player controller. Use this to access/modify variables.
     public BaseController control;
@@ -20,19 +21,17 @@ public class ClassBase : MonoBehaviour {
     public float speed;
     public Vector2 movement = new Vector2(0,0);
 
-    Rigidbody2D rb;
+    //Rigidbody2D rb;
     Vector2 position;
 
     // Use this for initialization
     public virtual void Start ()
-    {
-        rb = GetComponent<Rigidbody2D>();
-
+    {        
         control = transform.GetComponent<BaseController>();
         speed = BaseController.walkSpeed;
 
         groundContacts.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
-        groundContacts.useTriggers = true;        
+        //groundContacts.useTriggers = true;        
 
         control.fallSpeed = 2.5f;
         control.maxWalkSpeed = 3.5f;
@@ -50,41 +49,30 @@ public class ClassBase : MonoBehaviour {
             control.rb.velocity = new Vector2(control.rb.velocity.x, control.maxJumpForce);            
         }
 
-        if (rb.velocity.y < 0)
+        if (control.rb.velocity.y < 0)
         {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (control.fallSpeed - 1) * Time.deltaTime;
+            control.rb.velocity += Vector2.up * Physics2D.gravity.y * (control.fallSpeed - 1) * Time.deltaTime;
+            
         }
 
-        else if(rb.velocity.y > 0 && !Input.GetButton("Jump"))
+        else if(control.rb.velocity.y > 0 && !Input.GetButton("Jump"))
         {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (control.minJumpForce - 1) * Time.deltaTime;
+            control.rb.velocity += Vector2.up * Physics2D.gravity.y * (control.minJumpForce - 1) * Time.deltaTime;
+            
         }
 
-        // Handle grounded
-        Physics2D.Linecast(position, position - new Vector2(0, -1), groundContacts, hits);
+        // Handle grounded        
+        RaycastHit2D hit2D = Physics2D.Raycast(position, -transform.up, HitDist, LayerMask.GetMask("Terrain"));
 
-        for (int i = 0; i < hits.Length; ++i)
+        if (hit2D)
         {
-            if (hits[i])
-            {
-                control.isGrounded = true;
-            }
-
-            else
-            {
-                control.isGrounded = false;
-            }
+            control.isGrounded = true;
         }
-        
 
-        //if (Physics2D.Linecast(position, position - new Vector2(0.33f, -1), LayerMask.NameToLayer("Terrain")))
-        //{
-        //    control.isGrounded = true;
-        //}
-        //else if (Physics2D.Linecast(position, position - new Vector2(-0.33f, -1), LayerMask.NameToLayer("Terrain")))
-        //{
-        //    control.isGrounded = true;
-        //}
+        else
+        {
+            control.isGrounded = false;
+        }
     }
 
     public virtual void HandleInput()
@@ -94,7 +82,7 @@ public class ClassBase : MonoBehaviour {
             // Horizontal movement
             float xInput = Input.GetAxis("Horizontal");
 
-            control.rb.velocity = new Vector2(xInput * control.maxWalkSpeed, rb.velocity.y);
+            control.rb.velocity = new Vector2(xInput * control.maxWalkSpeed, control.rb.velocity.y);
 
         }        
     }
@@ -130,6 +118,7 @@ public class ClassBase : MonoBehaviour {
 
             //Jump
             HandleJump();
+
         }
     }
      
@@ -137,7 +126,6 @@ public class ClassBase : MonoBehaviour {
     public virtual void Update () {
 
         position = new Vector2(transform.position.x, transform.position.y);
-
         UpdateSprite();
 
     }

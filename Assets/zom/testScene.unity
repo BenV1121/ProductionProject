@@ -423,7 +423,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4766068049881062, guid: a294c2a70e605974395d6132a1f69e8e, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.1978037
+      value: 0.62
       objectReference: {fileID: 0}
     - target: {fileID: 4766068049881062, guid: a294c2a70e605974395d6132a1f69e8e, type: 2}
       propertyPath: m_LocalPosition.z
@@ -447,11 +447,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4766068049881062, guid: a294c2a70e605974395d6132a1f69e8e, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1700524194870426, guid: a294c2a70e605974395d6132a1f69e8e, type: 2}
       propertyPath: m_Name
       value: wood (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 61349487304449552, guid: a294c2a70e605974395d6132a1f69e8e,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a294c2a70e605974395d6132a1f69e8e, type: 2}
@@ -502,6 +507,7 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+  lastDistance: 0
   control: {fileID: 0}
   sprite: {fileID: 0}
   speed: 0
@@ -565,7 +571,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 240576792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.072, y: 1.573, z: 0}
+  m_LocalPosition: {x: 0.072, y: 1.341, z: 0}
   m_LocalScale: {x: 1.7430055, y: 1.7430052, z: 1.7430052}
   m_Children:
   - {fileID: 513449868}
@@ -1187,6 +1193,7 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+  lastDistance: 0
   control: {fileID: 0}
   sprite: {fileID: 0}
   speed: 0
@@ -2386,6 +2393,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 61349487304449552, guid: a294c2a70e605974395d6132a1f69e8e,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a294c2a70e605974395d6132a1f69e8e, type: 2}
   m_IsPrefabParent: 0
@@ -2500,11 +2512,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4850991873453476, guid: a4e2aeac66f2894459e63cb5761ffa9e,
     type: 2}
   m_PrefabInternal: {fileID: 1435128481}
---- !u!4 &1006738779 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4766068049881062, guid: a294c2a70e605974395d6132a1f69e8e,
-    type: 2}
-  m_PrefabInternal: {fileID: 1590989077}
 --- !u!1001 &1008279619
 Prefab:
   m_ObjectHideFlags: 0
@@ -2837,6 +2844,7 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+  lastDistance: 0
   control: {fileID: 1098277531}
   sprite: {fileID: 0}
   speed: 0
@@ -3081,7 +3089,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -2072225185
+  randomSeed: -181210983
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6418,6 +6426,7 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+  lastDistance: 0
   control: {fileID: 1109088892}
   sprite: {fileID: 0}
   speed: 0
@@ -7268,52 +7277,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4850991873453476, guid: a4e2aeac66f2894459e63cb5761ffa9e,
     type: 2}
   m_PrefabInternal: {fileID: 722918675}
---- !u!1001 &1590989077
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 2037639355}
-    m_Modifications:
-    - target: {fileID: 4766068049881062, guid: a294c2a70e605974395d6132a1f69e8e, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 4.433974
-      objectReference: {fileID: 0}
-    - target: {fileID: 4766068049881062, guid: a294c2a70e605974395d6132a1f69e8e, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -0.80219626
-      objectReference: {fileID: 0}
-    - target: {fileID: 4766068049881062, guid: a294c2a70e605974395d6132a1f69e8e, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4766068049881062, guid: a294c2a70e605974395d6132a1f69e8e, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4766068049881062, guid: a294c2a70e605974395d6132a1f69e8e, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4766068049881062, guid: a294c2a70e605974395d6132a1f69e8e, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4766068049881062, guid: a294c2a70e605974395d6132a1f69e8e, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4766068049881062, guid: a294c2a70e605974395d6132a1f69e8e, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1700524194870426, guid: a294c2a70e605974395d6132a1f69e8e, type: 2}
-      propertyPath: m_Name
-      value: wood (1)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: a294c2a70e605974395d6132a1f69e8e, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1619173367
 GameObject:
   m_ObjectHideFlags: 0
@@ -7738,7 +7701,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4766068049881062, guid: a294c2a70e605974395d6132a1f69e8e, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.19780374
+      value: -0.57
       objectReference: {fileID: 0}
     - target: {fileID: 4766068049881062, guid: a294c2a70e605974395d6132a1f69e8e, type: 2}
       propertyPath: m_LocalPosition.z
@@ -7762,11 +7725,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4766068049881062, guid: a294c2a70e605974395d6132a1f69e8e, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1700524194870426, guid: a294c2a70e605974395d6132a1f69e8e, type: 2}
       propertyPath: m_Name
       value: wood (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 61349487304449552, guid: a294c2a70e605974395d6132a1f69e8e,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a294c2a70e605974395d6132a1f69e8e, type: 2}
@@ -7848,7 +7816,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1523680345}
-  - {fileID: 1006738779}
   - {fileID: 162974233}
   - {fileID: 631121706}
   m_Father: {fileID: 0}
@@ -7953,6 +7920,20 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
+  m_FalloffTable:
+    m_Table[0]: 0
+    m_Table[1]: 0
+    m_Table[2]: 0
+    m_Table[3]: 0
+    m_Table[4]: 0
+    m_Table[5]: 0
+    m_Table[6]: 0
+    m_Table[7]: 0
+    m_Table[8]: 0
+    m_Table[9]: 0
+    m_Table[10]: 0
+    m_Table[11]: 0
+    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0

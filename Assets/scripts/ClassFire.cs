@@ -12,15 +12,18 @@ public class ClassFire : ClassBase
     {
         base.Start();
         if (control.isEnemyAI == true)
+        {
             fireRange = gameObject.AddComponent<CircleCollider2D>();
+            fireRange.isTrigger = true;
+            fireRange.radius = 1f;
+        }
 
         if (transform.GetComponent<BaseController>())
             control = transform.GetComponent<BaseController>();
 
         fps = gameObject.AddComponent<FireProjectileScript>();
 
-        fireRange.isTrigger = true;
-        fireRange.radius = 1f;
+        
 
     }
 
