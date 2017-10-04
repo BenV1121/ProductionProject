@@ -66,24 +66,29 @@ public class ClassFire : ClassBase
 
     }
 
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+    }
+
     // Update is called once per frame
     override public void Update()
     {
         UpdateSprite();
 
-        if (control.isEnemyAI == false)
-        {
-            //Basic movement
-            HandleInput();
+        //if (control.isEnemyAI == false)
+        //{
+        //    //Basic movement
+        //    HandleInput();
 
-            //Jump
-            if (Input.GetButton("Jump"))
-            {
-                HandleJump();
-            }
-        }
+        //    //Jump
+        //    if (Input.GetButton("Jump"))
+        //    {
+        //        HandleJump();
+        //    }
+        //}
 
-        // Handle Death
+        //// Handle Death
     }
 
     public void OnTriggerEnter2D(Collider2D other)

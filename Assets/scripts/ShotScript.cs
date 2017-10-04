@@ -14,16 +14,6 @@ public class ShotScript : MonoBehaviour
         Destroy(gameObject, 20);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (isEnemyShot == false)
-            if (other.gameObject.GetComponent<classBEnvironment>())
-                if (other.gameObject.GetComponent<classBEnvironment>().thiswallis == classBEnvironment.walltyp.WOOD)
-                {
-                    Destroy(gameObject);
-                }
-    }
-
     // Update is called once per frame
     void Update()
     {
