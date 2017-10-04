@@ -9,42 +9,82 @@ public class ClassBase : MonoBehaviour {
 
     // Ground Checks
     public float HitDist = 1.2f;    
-    RaycastHit2D[] hits;
+    public RaycastHit2D[] hits;
+    public ContactFilter2D groundContacts;
 
     //The player controller. Use this to access/modify variables.
     public BaseController control;
 
     // TODO: Sprite Animation Hookup
-    public Sprite sprite;
+    public SpriteRenderer sprite;
     public float speed;
     public Vector2 movement = new Vector2(0,0);
+
+    Rigidbody2D rb;
+    Vector2 position;
 
     // Use this for initialization
     public virtual void Start ()
     {
+        rb = GetComponent<Rigidbody2D>();
+
         control = transform.GetComponent<BaseController>();
         speed = BaseController.walkSpeed;
 
-        control.maxWalkSpeed = 2.5f;
+        groundContacts.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
+        groundContacts.useTriggers = true;        
+
+        control.fallSpeed = 2.5f;
+        control.maxWalkSpeed = 3.5f;
         control.walkSpeedMult = 1.0f;
-        control.maxJumpForce = 2f;
+        control.minJumpForce = 2f;
+        control.maxJumpForce = 5f;
     }
 
     public virtual void HandleJump()
     {
-        hits = Physics2D.RaycastAll(transform.position, -transform.up, HitDist);
-        for (int i = 0; i < hits.Length; i++)
+
+        if (control.isGrounded && Input.GetButton("Jump"))
+        {            
+            control.isGrounded = false;
+            control.rb.velocity = new Vector2(control.rb.velocity.x, control.maxJumpForce);            
+        }
+
+        if (rb.velocity.y < 0)
         {
-            if (hits != null && hits[i] != hits[i].collider.gameObject.tag.Equals("Player"))
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (control.fallSpeed - 1) * Time.deltaTime;
+        }
+
+        else if(rb.velocity.y > 0 && !Input.GetButton("Jump"))
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (control.minJumpForce - 1) * Time.deltaTime;
+        }
+
+        // Handle grounded
+        Physics2D.Linecast(position, position - new Vector2(0, -1), groundContacts, hits);
+
+        for (int i = 0; i < hits.Length; ++i)
+        {
+            if (hits[i])
             {
-                Debug.Log(hits[i].collider.gameObject.name);
-                control.isJumping = true;
+                control.isGrounded = true;
             }
+
             else
             {
-                control.isJumping = false;
+                control.isGrounded = false;
             }
         }
+        
+
+        //if (Physics2D.Linecast(position, position - new Vector2(0.33f, -1), LayerMask.NameToLayer("Terrain")))
+        //{
+        //    control.isGrounded = true;
+        //}
+        //else if (Physics2D.Linecast(position, position - new Vector2(-0.33f, -1), LayerMask.NameToLayer("Terrain")))
+        //{
+        //    control.isGrounded = true;
+        //}
     }
 
     public virtual void HandleInput()
@@ -54,19 +94,8 @@ public class ClassBase : MonoBehaviour {
             // Horizontal movement
             float xInput = Input.GetAxis("Horizontal");
 
-            movement.x = xInput * control.walkSpeedMult * speed;
-            control.rb.AddForce(movement, ForceMode2D.Impulse);
+            control.rb.velocity = new Vector2(xInput * control.maxWalkSpeed, rb.velocity.y);
 
-            // Movement Speed Clamp
-            if (control.rb.velocity.x > control.maxWalkSpeed)
-                control.rb.velocity = new Vector2(control.maxWalkSpeed, control.rb.velocity.y);
-            if (control.rb.velocity.x < -control.maxWalkSpeed)
-                control.rb.velocity = new Vector2(-control.maxWalkSpeed, control.rb.velocity.y);
-
-            if (control.isJumping == true && Input.GetKeyDown(KeyCode.Space))
-            {
-                control.rb.AddForce(Vector2.up * control.maxJumpForce, ForceMode2D.Impulse);
-            }
         }        
     }
 
@@ -92,22 +121,24 @@ public class ClassBase : MonoBehaviour {
         }                
     }
 
-    // Update is called once per frame
-    public virtual void Update () {
-        
-        UpdateSprite();
-
+    public virtual void FixedUpdate()
+    {
         if (control.isEnemyAI == false)
         {
             //Basic movement
             HandleInput();
 
             //Jump
-            if (Input.GetButton("Jump"))
-            {
-                HandleJump();
-            }
+            HandleJump();
         }
+    }
+     
+    // Update is called once per frame
+    public virtual void Update () {
+
+        position = new Vector2(transform.position.x, transform.position.y);
+
+        UpdateSprite();
 
     }
 }

@@ -488,6 +488,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HitDist: 1.2
+  groundContacts:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
   control: {fileID: 0}
   sprite: {fileID: 0}
   speed: 0
@@ -514,10 +528,11 @@ MonoBehaviour:
   mimicTimer: 0
   attackCooldownTime: 1.5
   attackTimer: 0
+  minJumpForce: 2
   maxJumpForce: 2
-  fallSpeedMult: 1
+  fallSpeed: 2.5
   isJumping: 0
-  isGrounded: 0
+  isGrounded: 1
   canDoubleJump: 0
   maxJumps: 1
   maxWalkSpeed: 2.5
@@ -1158,6 +1173,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HitDist: 1.2
+  groundContacts:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
   control: {fileID: 0}
   sprite: {fileID: 0}
   speed: 0
@@ -1184,8 +1213,9 @@ MonoBehaviour:
   mimicTimer: 0
   attackCooldownTime: 1.5
   attackTimer: 0
+  minJumpForce: 2
   maxJumpForce: 2
-  fallSpeedMult: 1
+  fallSpeed: 2.5
   isJumping: 0
   isGrounded: 0
   canDoubleJump: 0
@@ -2793,6 +2823,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HitDist: 1.2
+  groundContacts:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
   control: {fileID: 1098277531}
   sprite: {fileID: 0}
   speed: 0
@@ -2883,8 +2927,9 @@ MonoBehaviour:
   mimicTimer: 0
   attackCooldownTime: 1.5
   attackTimer: 0
+  minJumpForce: 2
   maxJumpForce: 2
-  fallSpeedMult: 1
+  fallSpeed: 2.5
   isJumping: 0
   isGrounded: 0
   canDoubleJump: 0
@@ -6359,6 +6404,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HitDist: 1.2
+  groundContacts:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
   control: {fileID: 1109088892}
   sprite: {fileID: 0}
   speed: 0
@@ -6385,8 +6444,9 @@ MonoBehaviour:
   mimicTimer: 0
   attackCooldownTime: 1.5
   attackTimer: 0
+  minJumpForce: 2
   maxJumpForce: 2
-  fallSpeedMult: 1
+  fallSpeed: 2.5
   isJumping: 0
   isGrounded: 0
   canDoubleJump: 0
@@ -7893,20 +7953,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0

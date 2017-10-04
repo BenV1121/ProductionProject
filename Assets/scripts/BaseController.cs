@@ -26,9 +26,10 @@ public class BaseController : MonoBehaviour {
     public float attackTimer = 0f;
 
     //Movement variables
+    public float minJumpForce = 2f;
     public float maxJumpForce = 2f;
-    const float fallSpeed = 5f;
-    public float fallSpeedMult = 1.0f;
+    public float fallSpeed = 2.5f;    
+
     public bool isJumping = false;
     public bool isGrounded = false;
 
