@@ -5,14 +5,27 @@ using UnityEngine;
 public class ClassFire : ClassBase
 {
     FireProjectileScript fps;
+<<<<<<< HEAD
+    CircleCollider2D fireRange;
+=======
+>>>>>>> dev
 
     // Use this for initialization
     public override void Start()
     {
+        base.Start();
+        if (control.isEnemyAI == true)
+            fireRange = gameObject.AddComponent<CircleCollider2D>();
+
         if (transform.GetComponent<BaseController>())
             control = transform.GetComponent<BaseController>();
 
         fps = gameObject.AddComponent<FireProjectileScript>();
+<<<<<<< HEAD
+        fireRange.isTrigger = true;
+        fireRange.radius = 1f;
+=======
+>>>>>>> dev
     }
 
     public override void HandleInput()
@@ -57,17 +70,18 @@ public class ClassFire : ClassBase
     // Update is called once per frame
     override public void Update()
     {
+        UpdateSprite();
 
-        //If this is an enemy AI, 
-        if (control.isEnemyAI)
+        if (control.isEnemyAI == false)
         {
-
-        }
-
-        else
-        {
-            // do playerInput stuff
+            //Basic movement
             HandleInput();
+
+            //Jump
+            if (Input.GetButton("Jump"))
+            {
+                HandleJump();
+            }
         }
 
         // Handle Death
