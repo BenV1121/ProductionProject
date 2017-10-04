@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 81362962}
   - component: {fileID: 81362961}
   - component: {fileID: 81362963}
+  - component: {fileID: 81362964}
   m_Layer: 0
   m_Name: SpikeBottom
   m_TagString: Untagged
@@ -206,6 +207,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
+--- !u!114 &81362964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 81362960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df85ddc4bcaa2ce4a9d2e712406432ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spikes: {fileID: 0}
+  timer: 2
+  activateTimer: 2
 --- !u!1 &89867733
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +420,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1105952085}
   - component: {fileID: 1105952087}
-  - component: {fileID: 1105952086}
   - component: {fileID: 1105952088}
   m_Layer: 0
   m_Name: Spikes
@@ -427,19 +441,6 @@ Transform:
   m_Father: {fileID: 81362962}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1105952086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1105952084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df85ddc4bcaa2ce4a9d2e712406432ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: 5
-  activateTimer: 5
 --- !u!212 &1105952087
 SpriteRenderer:
   m_ObjectHideFlags: 0

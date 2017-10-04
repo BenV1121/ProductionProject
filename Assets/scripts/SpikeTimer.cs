@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class SpikeTimer : MonoBehaviour
 {
-    public float timer;
-    float refillTimer;
+    public GameObject spikes;
 
-    public float activateTimer = 0;
-    float refillActiveTimer = 5;
+    public float timer;
+    public float activateTimer;
+
+    float refillTimers = 2;
 
     // Use this for initialization
     void Start ()
     {
         ////timer = 5;
         ////refillTimer = 5;
+
+        spikes = GameObject.Find("Spikes");
     }
 
     // Update is called once per frame
@@ -24,18 +27,18 @@ public class SpikeTimer : MonoBehaviour
 
         if (timer <= 0)
         {
-            timer = refillTimer;
-
-            gameObject.SetActive(false);
+            spikes.SetActive(false);
 
             activateTimer -= Time.deltaTime;
         }
 
         if (activateTimer <= 0)
         {
-            activateTimer = refillActiveTimer;
+            activateTimer = refillTimers;
 
-            gameObject.SetActive(true);
+            timer = refillTimers;
+
+            spikes.SetActive(true);
         }
 	}
 }
