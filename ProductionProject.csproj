@@ -82,12 +82,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\scripts\BaseController.cs" />
+    <Compile Include="Assets\scripts\BoulderScript.cs" />
     <Compile Include="Assets\scripts\CameraController.cs" />
     <Compile Include="Assets\scripts\ClassBase.cs" />
     <Compile Include="Assets\scripts\ClassFire.cs" />
     <Compile Include="Assets\scripts\ClassMirror.cs" />
-    <Compile Include="Assets\scripts\ClassSlowGuy.cs" />
-    <Compile Include="Assets\scripts\ClassTako.cs" />
     <Compile Include="Assets\scripts\EnemyShootOnTrigger.cs" />
     <Compile Include="Assets\scripts\FireGuyController.cs" />
     <Compile Include="Assets\scripts\FireProjectileScript.cs" />

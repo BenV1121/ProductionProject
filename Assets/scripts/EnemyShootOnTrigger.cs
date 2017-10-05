@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyShootOnTrigger : MonoBehaviour
 {
     // Update is called once per frame
-    void OnTriggerEnter2D(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         FireProjectileScript weapon = GetComponent<FireProjectileScript>();
 
@@ -15,7 +15,7 @@ public class EnemyShootOnTrigger : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider other)
+    void OnTriggerExit2D(Collider2D other)
     {
         FireProjectileScript weapon = GetComponent<FireProjectileScript>();
 
