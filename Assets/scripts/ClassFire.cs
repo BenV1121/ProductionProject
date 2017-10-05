@@ -5,7 +5,10 @@ using UnityEngine;
 public class ClassFire : ClassBase
 {
     FireProjectileScript fps;
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
     CircleCollider2D fireRange;
 
     // Use this for initialization
@@ -13,15 +16,24 @@ public class ClassFire : ClassBase
     {
         base.Start();
         if (control.isEnemyAI == true)
+        {
             fireRange = gameObject.AddComponent<CircleCollider2D>();
+            fireRange.isTrigger = true;
+            fireRange.radius = 1f;
+        }
 
         if (transform.GetComponent<BaseController>())
             control = transform.GetComponent<BaseController>();
 
         fps = gameObject.AddComponent<FireProjectileScript>();
 
+<<<<<<< HEAD
         fireRange.isTrigger = true;
         fireRange.radius = 1f;
+=======
+        
+
+>>>>>>> dev
     }
 
     public override void HandleInput()
@@ -63,24 +75,29 @@ public class ClassFire : ClassBase
 
     }
 
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+    }
+
     // Update is called once per frame
     override public void Update()
     {
         UpdateSprite();
 
-        if (control.isEnemyAI == false)
-        {
-            //Basic movement
-            HandleInput();
+        //if (control.isEnemyAI == false)
+        //{
+        //    //Basic movement
+        //    HandleInput();
 
-            //Jump
-            if (Input.GetButton("Jump"))
-            {
-                HandleJump();
-            }
-        }
+        //    //Jump
+        //    if (Input.GetButton("Jump"))
+        //    {
+        //        HandleJump();
+        //    }
+        //}
 
-        // Handle Death
+        //// Handle Death
     }
 
     public void OnTriggerEnter2D(Collider2D other)

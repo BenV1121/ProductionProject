@@ -23,8 +23,12 @@ public class FireProjectileScript : MonoBehaviour
     {
         shootCooldown = 0f;
         bc = GetComponent<BaseController>();
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
         cfBuddyFriend = gameObject.GetComponent<ClassFire>();
+
         if (cfBuddyFriend.control.isEnemyAI)
         {
             shotPrefab = (GameObject)Resources.Load("EProjectile");
