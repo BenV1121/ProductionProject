@@ -23,6 +23,7 @@ public class ClassSlowGuy : ClassBase {
         LeftExtent.x = LeftExtent.x - Random.Range(1,3);
         RightExtent.x = RightExtent.x + Random.Range(1,3);
 
+        control.maxJumpForce = 1.2f;
         control.maxWalkSpeed = 1.05f;
         control.walkSpeedMult = .92f;
     }

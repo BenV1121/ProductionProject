@@ -5,24 +5,40 @@ using UnityEngine;
 public class ClassMirror : ClassBase {
 
     // The default starting character: Mirror
-    public BoxCollider2D mimicCollider;
+    public CapsuleCollider2D mimicCollider;
     public bool canMimic = false;
     public ClassBase otherClass;
-    public System.Type otherType;
+    public System.Type otherType;    
+
+
 
 	// Use this for initialization
 	override public void Start ()
     {
         base.Start();
 
-        mimicCollider = gameObject.AddComponent<BoxCollider2D>();
+        mimicCollider = gameObject.AddComponent<CapsuleCollider2D>();
         mimicCollider.isTrigger = true;
-        mimicCollider.size = new Vector2(.6f, .2f);
+        //mimicCollider.size = new Vector2(.6f, .2f);
 
         otherClass = null;
     }
 
     void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.GetComponent<BaseController>())
+        {
+            canMimic = true;
+            otherClass = other.gameObject.GetComponent<BaseController>().playerClass;
+        }
+        else
+        {
+            canMimic = false;
+            otherClass = null;
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.GetComponent<BaseController>())
         {
@@ -58,6 +74,7 @@ public class ClassMirror : ClassBase {
                 control.playerClass = gameObject.AddComponent(otherClass.GetType()) as ClassBase;            
 
                 Destroy(otherClass.gameObject);
+                Destroy(mimicCollider);
                 Destroy(this);
             }             
         }

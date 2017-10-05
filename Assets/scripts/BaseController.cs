@@ -26,9 +26,10 @@ public class BaseController : MonoBehaviour {
     public float attackTimer = 0f;
 
     //Movement variables
-    public float maxJumpForce = 5f;
-    const float fallSpeed = 5f;
-    public float fallSpeedMult = 1.0f;
+    public float minJumpForce = 2f;
+    public float maxJumpForce = 2f;
+    public float fallSpeed = 2.5f;    
+
     public bool isJumping = false;
     public bool isGrounded = false;
 
@@ -67,7 +68,8 @@ public class BaseController : MonoBehaviour {
 
         if (!isDead)
         {
-            playerClass.Update();
+            //Not needed
+            //playerClass.Update();
 
             // Simple State Machine
             // Go back to IDLE after doing actions

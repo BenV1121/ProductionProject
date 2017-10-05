@@ -14,7 +14,7 @@ public class FireProjectileScript : MonoBehaviour
     public float shootingRate = 1f;
 
     public bool shotFlip = false;
-
+    BaseController bc;
     // Cooldown
 
     private float shootCooldown;
@@ -22,8 +22,9 @@ public class FireProjectileScript : MonoBehaviour
     void Start()
     {
         shootCooldown = 0f;
-
+        bc = GetComponent<BaseController>();
         cfBuddyFriend = gameObject.GetComponent<ClassFire>();
+
         if (cfBuddyFriend.control.isEnemyAI)
         {
             shotPrefab = (GameObject)Resources.Load("EProjectile");
@@ -38,8 +39,6 @@ public class FireProjectileScript : MonoBehaviour
         {
             shootCooldown -= Time.deltaTime;
         }
-
-        BaseController bc = GetComponent<BaseController>();
 
         if(bc.isEnemyAI == false)
         {

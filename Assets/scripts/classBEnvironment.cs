@@ -18,9 +18,9 @@ public class classBEnvironment : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D collider)
     {
         //If the wall is rock and is attacked by a rock dude, destroy it
-        //New ClassBase() is a place holder, replace it with the Rock man class that aaron is working on.
+        
         if(thiswallis == walltyp.ROCK &&
-           collider.gameObject.GetComponent<BaseController>().playerClass == new ClassBase() &&
+           collider.gameObject.GetComponent<Rock_Enemy>() &&           
            collider.gameObject.GetComponent<BaseController>().playerState == BaseController.PlayerState.ATTACK)
         {
             breakMe();
@@ -29,8 +29,10 @@ public class classBEnvironment : MonoBehaviour {
         //if the wall is wood and is hit by a fireball destroy it
         if(thiswallis == walltyp.WOOD &&
            collider.gameObject.tag == "FireBall")
+           //collider.gameObject.GetComponent<ShotScript>())
+           
         {
             breakMe();
         }
-    }
+    }    
 }
