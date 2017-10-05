@@ -13,6 +13,8 @@ public class ClassBase : MonoBehaviour {
     public ContactFilter2D groundContacts;
     public float lastDistance;
 
+    LayerMask terrainLayer;
+
     //The player controller. Use this to access/modify variables.
     public BaseController control;
 
@@ -29,6 +31,8 @@ public class ClassBase : MonoBehaviour {
     {        
         control = transform.GetComponent<BaseController>();
         speed = BaseController.walkSpeed;
+
+        terrainLayer = LayerMask.GetMask("Terrain");
 
         groundContacts.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
         //groundContacts.useTriggers = true;        
@@ -62,7 +66,7 @@ public class ClassBase : MonoBehaviour {
         }
 
         // Handle grounded        
-        RaycastHit2D hit2D = Physics2D.Raycast(position, -transform.up, HitDist, LayerMask.GetMask("Terrain"));
+        RaycastHit2D hit2D = Physics2D.Raycast(position - new Vector2(0f, .5f), Vector2.down, HitDist, terrainLayer);
 
         if (hit2D)
         {
@@ -81,9 +85,7 @@ public class ClassBase : MonoBehaviour {
         {
             // Horizontal movement
             float xInput = Input.GetAxis("Horizontal");
-
             control.rb.velocity = new Vector2(xInput * control.maxWalkSpeed, control.rb.velocity.y);
-
         }        
     }
 
@@ -118,7 +120,6 @@ public class ClassBase : MonoBehaviour {
 
             //Jump
             HandleJump();
-
         }
     }
      

@@ -20,7 +20,7 @@ public class classBEnvironment : MonoBehaviour {
         //If the wall is rock and is attacked by a rock dude, destroy it
         
         if(thiswallis == walltyp.ROCK &&
-           collider.gameObject.GetComponent<Rock_Enemy>() &&
+           collider.gameObject.GetComponent<Rock_Enemy>() &&           
            collider.gameObject.GetComponent<BaseController>().playerState == BaseController.PlayerState.ATTACK)
         {
             breakMe();

@@ -68,7 +68,8 @@ public class BaseController : MonoBehaviour {
 
         if (!isDead)
         {
-            playerClass.Update();
+            //Not needed
+            //playerClass.Update();
 
             // Simple State Machine
             // Go back to IDLE after doing actions
