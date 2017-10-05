@@ -41,7 +41,10 @@ GameObject:
   - component: {fileID: 114573518144047618}
   - component: {fileID: 58368279407466218}
   - component: {fileID: 50257096475147852}
+<<<<<<< HEAD
   - component: {fileID: 96350156726818354}
+=======
+>>>>>>> dev
   m_Layer: 0
   m_Name: Projectile
   m_TagString: FireBall
@@ -69,10 +72,16 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1637856437714668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: -9.549, y: 3.048, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 4269957734461990}
+=======
+  m_LocalPosition: {x: 3.763145, y: 0.5517598, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+>>>>>>> dev
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
