@@ -19,7 +19,8 @@ public class ClassMirror : ClassBase {
 
         mimicCollider = gameObject.AddComponent<CapsuleCollider2D>();
         mimicCollider.isTrigger = true;
-        //mimicCollider.size = new Vector2(.6f, .2f);
+        mimicCollider.direction = CapsuleDirection2D.Horizontal;
+        mimicCollider.size = new Vector2(1f, 3f);
 
         otherClass = null;
     }

@@ -42,7 +42,7 @@ public class ClassBase : MonoBehaviour {
         control.maxWalkSpeed = 3.5f;
         control.walkSpeedMult = 1.0f;
         control.minJumpForce = 2f;
-        control.maxJumpForce = 5f;
+        control.maxJumpForce = 3f;
     }
 
     public virtual void HandleJump()
@@ -97,7 +97,7 @@ public class ClassBase : MonoBehaviour {
 
         if (control.isGrounded == true && Input.GetKey(KeyCode.Space))
         {
-            control.rb.AddForce(Vector2.up * 5f, ForceMode2D.Impulse);
+            control.rb.AddForce(Vector2.up * control.maxJumpForce, ForceMode2D.Impulse);
             //Debug.Log("JAAAUP...");
             control.rb.gravityScale = 3f;
         }
