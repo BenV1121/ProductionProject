@@ -8,7 +8,7 @@ public class ClassBase : MonoBehaviour {
     // See ClassMirror for example of inheritance.
 
     // Ground Checks
-    public float HitDist = 0.02f;    
+    public float HitDist;    
     public RaycastHit2D[] hits;
     public ContactFilter2D groundContacts;
     public float lastDistance;
@@ -36,7 +36,8 @@ public class ClassBase : MonoBehaviour {
 
         groundContacts.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
         //groundContacts.useTriggers = true;        
-
+        HitDist = 1f;
+        HitDist = GetComponent<BoxCollider2D>().bounds.extents.y * 2;
         control.fallSpeed = 2.5f;
         control.maxWalkSpeed = 3.5f;
         control.walkSpeedMult = 1.0f;
@@ -46,56 +47,59 @@ public class ClassBase : MonoBehaviour {
 
     public virtual void HandleJump()
     {
-<<<<<<< HEAD
-        if (control.isGrounded == true && Input.GetKeyDown(KeyCode.Space))
-        {
-            control.rb.AddForce(Vector2.up * control.maxJumpForce, ForceMode2D.Impulse);
-        }
+        //if (control.isGrounded && Input.GetButton("Jump"))
+        //{            
+        //    control.isGrounded = false;
+        //    control.rb.velocity = new Vector2(control.rb.velocity.x, control.maxJumpForce);            
+        //}
 
-        hits = Physics2D.RaycastAll(transform.position, -transform.up, HitDist);
+        //if (control.rb.velocity.y < 0)
+        //{
+        //    control.rb.velocity += Vector2.up * Physics2D.gravity.y * (control.fallSpeed - 1) * Time.deltaTime;
+
+        //}
+
+        //else if(control.rb.velocity.y > 0 && !Input.GetButton("Jump"))
+        //{
+        //    control.rb.velocity += Vector2.up * Physics2D.gravity.y * (control.minJumpForce - 1) * Time.deltaTime;
+
+        //}
+
+        //// Handle grounded        
+        //RaycastHit2D hit2D = Physics2D.Raycast(position - new Vector2(0f, .5f), Vector2.down, HitDist, terrainLayer);
+
+        //if (hit2D)
+        //{
+        //    control.isGrounded = true;
+        //}
+
+        //else
+        //{
+        //    control.isGrounded = false;
+
+        //}
+        hits = Physics2D.RaycastAll(control.transform.position, -control.transform.up, HitDist);
         for (int i = 0; i < hits.Length; i++)
         {
             if (hits != null && hits[i] != hits[i].collider.gameObject.tag.Equals("Player"))
+                //hits[i] != hits[i].collider.gameObject.tag.Equals("SelfAI"))
             {
-                Debug.Log(hits[i].collider.gameObject.name);
+                //Debug.Log(hit[i].collider.gameObject.name);
                 control.isGrounded = true;
             }
             else
             {
                 control.isGrounded = false;
             }
-=======
 
-        if (control.isGrounded && Input.GetButton("Jump"))
-        {            
-            control.isGrounded = false;
-            control.rb.velocity = new Vector2(control.rb.velocity.x, control.maxJumpForce);            
         }
+        Debug.DrawRay(control.transform.position, -control.transform.up * HitDist, Color.red);
 
-        if (control.rb.velocity.y < 0)
+        if (control.isGrounded == true && Input.GetKey(KeyCode.Space))
         {
-            control.rb.velocity += Vector2.up * Physics2D.gravity.y * (control.fallSpeed - 1) * Time.deltaTime;
-            
-        }
-
-        else if(control.rb.velocity.y > 0 && !Input.GetButton("Jump"))
-        {
-            control.rb.velocity += Vector2.up * Physics2D.gravity.y * (control.minJumpForce - 1) * Time.deltaTime;
-            
-        }
-
-        // Handle grounded        
-        RaycastHit2D hit2D = Physics2D.Raycast(position - new Vector2(0f, .5f), Vector2.down, HitDist, terrainLayer);
-
-        if (hit2D)
-        {
-            control.isGrounded = true;
-        }
-
-        else
-        {
-            control.isGrounded = false;
->>>>>>> dev
+            control.rb.AddForce(Vector2.up * 5f, ForceMode2D.Impulse);
+            //Debug.Log("JAAAUP...");
+            control.rb.gravityScale = 3f;
         }
     }
 
@@ -105,7 +109,7 @@ public class ClassBase : MonoBehaviour {
         {
             // Horizontal movement
             float xInput = Input.GetAxis("Horizontal");
-<<<<<<< HEAD
+
 
             movement.x = xInput * control.walkSpeedMult * speed;
             control.rb.AddForce(movement, ForceMode2D.Impulse);
@@ -116,10 +120,7 @@ public class ClassBase : MonoBehaviour {
             if (control.rb.velocity.x < -control.maxWalkSpeed)
                 control.rb.velocity = new Vector2(-control.maxWalkSpeed, control.rb.velocity.y);
 
-
-=======
             control.rb.velocity = new Vector2(xInput * control.maxWalkSpeed, control.rb.velocity.y);
->>>>>>> dev
         }        
     }
 

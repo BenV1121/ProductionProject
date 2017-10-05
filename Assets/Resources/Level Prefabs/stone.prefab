@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 61075235856240326}
   - component: {fileID: 114136752495868770}
   - component: {fileID: 50255901369709398}
+  - component: {fileID: 114806823290708556}
   m_Layer: 8
   m_Name: stone
   m_TagString: Untagged
@@ -126,6 +127,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thiswallis: 0
+--- !u!114 &114806823290708556
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1700524194870426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 513c0d08e83d1de4594064ad85de06a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212370617056272298
 SpriteRenderer:
   m_ObjectHideFlags: 1

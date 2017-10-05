@@ -104,8 +104,13 @@ public class BaseController : MonoBehaviour {
             {
                 if (!gameObject.GetComponent<ClassMirror>()
                 && playerState != PlayerState.MIMIC)
-                {                  
-                    Destroy(playerClass);
+                {
+                    if (GetComponent<FireProjectileScript>())
+                    {
+                        Destroy(GetComponent<FireProjectileScript>());
+                    }
+
+                    Destroy(playerClass);                    
                     playerClass = gameObject.AddComponent<ClassMirror>();                    
                 }
             }
