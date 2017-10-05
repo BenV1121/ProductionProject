@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -119,6 +119,8 @@ GameObject:
   - component: {fileID: 373256901}
   - component: {fileID: 373256903}
   - component: {fileID: 373256904}
+  - component: {fileID: 373256906}
+  - component: {fileID: 373256905}
   m_Layer: 0
   m_Name: New Sprite
   m_TagString: Player
@@ -175,8 +177,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 373256900}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.53, y: 0.8828514, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -1.54, y: 0.88285, z: 0}
+  m_LocalScale: {x: 0.46249926, y: 0.8546811, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -226,6 +228,52 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &373256905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 373256900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6952d7fbaa6c77942bbc0abebee5986f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerState: 0
+  myCollider: {fileID: 0}
+  rb: {fileID: 0}
+  isEnemyAI: 0
+  isDead: 0
+  mimicTimer: 0
+  attackCooldownTime: 1.5
+  attackTimer: 0
+  maxJumpForce: 5
+  fallSpeedMult: 1
+  isJumping: 0
+  isGrounded: 0
+  canDoubleJump: 0
+  maxJumps: 1
+  maxWalkSpeed: 2.5
+  walkSpeedMult: 1
+  playerClass: {fileID: 0}
+--- !u!114 &373256906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 373256900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fcad2d2d9e90f84c884a61a3a3092d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitDist: 1.2
+  control: {fileID: 373256905}
+  sprite: {fileID: 0}
+  speed: 3
+  movement: {x: 0, y: 0}
+  rb: {fileID: 373256904}
+  HitDistance: 0.4
 --- !u!1 &925219728
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,7 +411,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &951871839
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -437,8 +485,6 @@ MonoBehaviour:
   movement: {x: 0, y: 0}
   rb: {fileID: 951871838}
   HitDistance: 0.4
-  jumpforce: 2
-  jumpMultiplyer: 2
 --- !u!58 &951871842
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -644,6 +690,20 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
+  m_FalloffTable:
+    m_Table[0]: 0
+    m_Table[1]: 0
+    m_Table[2]: 0
+    m_Table[3]: 0
+    m_Table[4]: 0
+    m_Table[5]: 0
+    m_Table[6]: 0
+    m_Table[7]: 0
+    m_Table[8]: 0
+    m_Table[9]: 0
+    m_Table[10]: 0
+    m_Table[11]: 0
+    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0

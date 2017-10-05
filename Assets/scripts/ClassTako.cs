@@ -15,10 +15,7 @@ public class ClassTako : ClassBase {
     //the time current time the button has been helpd
     float GameTime;
     //temporary delta time
-    float tempdt = 0f;
     float jumpTime = 0f;
-    public float jumpforce;
-    public float jumpMultiplyer;
 
  
  //// AI CODE
@@ -52,33 +49,23 @@ public class ClassTako : ClassBase {
             SetLastPosition = true;
             Debug.Log("player enter");
         }
-
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
         if(other.gameObject.tag == "Player")
         {
-            LastPosition = other.transform.position;
-
-            
+            LastPosition = other.transform.position;            
         }
-        //other != null && other != other.gameObject.tag.Equals("Player") && other != gameObject.tag.Equals("SelfAI");
-
-
-
-
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
-            //LastPosition = other.transform.position;
-
+            SetLastPosition = false;
             Debug.Log("player exit");
         }
-
     }
 
     public void CanJump()
@@ -86,19 +73,16 @@ public class ClassTako : ClassBase {
         hit = Physics2D.RaycastAll(transform.position, -transform.up, HitDistance);
         for (int i = 0; i < hit.Length; i++)
         {
-            if (hit != null && hit[i] != hit[i].collider.gameObject.tag.Equals("Player") && hit[i] != hit[i].collider.gameObject.tag.Equals("SelfAI"))
+            if (hit != null &&
+                hit[i] != hit[i].collider.gameObject.tag.Equals("Player") &&
+                hit[i] != hit[i].collider.gameObject.tag.Equals("SelfAI"))
             {
                 //Debug.Log(hit[i].collider.gameObject.name);
                 control.isGrounded = true;
-
-
             }
             else
             {
                 control.isGrounded = false;
-
-
-
             }
 
         }
@@ -157,42 +141,51 @@ public class ClassTako : ClassBase {
 
     void JumpTowardPoint()
     {
-        float gravity = Physics.gravity.magnitude;
-        float initialVelocity = CalculateJumpSpeed(50, gravity);
+       // float gravity = Physics.gravity.magnitude;
+      //  float initialVelocity = CalculateJumpSpeed(50, gravity) / 30;
 
         Vector2 direction = (LastPosition - rb.position);
+        Debug.Log(direction);
 
-        rb.AddForce(initialVelocity * direction, ForceMode2D.Impulse);
+        if(direction.x > 0 && SetLastPosition == true)
+        {
+            rb.AddForce(Vector2.up * 5f, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.right * 2f, ForceMode2D.Impulse);
+
+        }
+        else if (direction.x < 0 && SetLastPosition == true)
+        {
+            rb.AddForce(Vector2.up * 5f, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.left * 2f, ForceMode2D.Impulse);
+
+        }
     }
 
     private float CalculateJumpSpeed(float jumpHeight, float gravity)
     {
         return Mathf.Sqrt(2 * jumpHeight * gravity);
     }
-
+   
     public void AIscript()
     {
         CanJump();
-
-
-      
-
-
-
+       
         //default jump
         if (timer > 1 && control.isGrounded == true)
         {
             rb.AddForce(Vector2.up * 5f, ForceMode2D.Impulse);
-            if(LastPosition != null && SetLastPosition == true)
-            {
-                JumpTowardPoint();
-               // rb.AddForce(Vector2.up * LastPosition, ForceMode2D.Impulse);
-               // rb.
-            }
+
             timer = 0;
+        }
+        else if (LastPosition != null && SetLastPosition == true && control.isGrounded == true)
+        {
+          
+            JumpTowardPoint();
+
         }
     }
 
+   
     // Update is called once per frame
     public override void Update ()
     {
@@ -207,12 +200,10 @@ public class ClassTako : ClassBase {
         {
             this.gameObject.tag = ("SelfAI");
             AIscript();
+           // Invoke("AIscript", 2);
         }
-        if(control.isGrounded)
-            Debug.Log("grounded");
-        else
-            Debug.Log("Air");
-
+        
+       
 
     }
 }
