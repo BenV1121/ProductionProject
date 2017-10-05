@@ -5,7 +5,7 @@ using UnityEngine;
 public class ClassMirror : ClassBase {
 
     // The default starting character: Mirror
-    public BoxCollider2D mimicCollider;
+    public CapsuleCollider2D mimicCollider;
     public bool canMimic = false;
     public ClassBase otherClass;
     public System.Type otherType;    
@@ -17,14 +17,28 @@ public class ClassMirror : ClassBase {
     {
         base.Start();
 
-        mimicCollider = gameObject.AddComponent<BoxCollider2D>();
+        mimicCollider = gameObject.AddComponent<CapsuleCollider2D>();
         mimicCollider.isTrigger = true;
-        mimicCollider.size = new Vector2(.6f, .2f);
+        //mimicCollider.size = new Vector2(.6f, .2f);
 
         otherClass = null;
     }
 
     void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.GetComponent<BaseController>())
+        {
+            canMimic = true;
+            otherClass = other.gameObject.GetComponent<BaseController>().playerClass;
+        }
+        else
+        {
+            canMimic = false;
+            otherClass = null;
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.GetComponent<BaseController>())
         {
