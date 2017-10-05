@@ -108,6 +108,81 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &13800353
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 13800354}
+  - component: {fileID: 13800356}
+  - component: {fileID: 13800355}
+  m_Layer: 0
+  m_Name: Rock Punch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &13800354
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 13800353}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1939033895}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &13800355
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 13800353}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &13800356
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 13800353}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -10.38, y: -1.31}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 19.77, y: 5.7}
+  m_EdgeRadius: 0
 --- !u!1 &662684036
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,8 +782,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 22.49, y: 11.999999}
-    newSize: {x: 0.89, y: 0.8}
+    oldSize: {x: 41.04, y: 12.000001}
+    newSize: {x: 22.49, y: 11.999999}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -748,14 +823,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   control: {fileID: 0}
-  sprite: {fileID: 21300000, guid: f657c269c305b97408535591ad6aa3eb, type: 3}
+  sprite: {fileID: 21300000, guid: dee455e0c020b6f42b3fc12a65719404, type: 3}
   end_time_landing: 0.25
+  end_time_reelback: 0.25
+  end_time_attacking: 0.75
   end_jump_height: 2
   end_scale_y: 0
   end_image_y: 0
   image_idle: {fileID: 21300000, guid: f657c269c305b97408535591ad6aa3eb, type: 3}
   image_jump: {fileID: 21300000, guid: 23025cd47cede56419227780e0c362b5, type: 3}
   image_land: {fileID: 21300000, guid: fd3369ff0bb38704180e498ca76cd66f, type: 3}
+  image_reel_back: {fileID: 21300000, guid: dbb712f15064e5f4bb03f123ddc69668, type: 3}
+  image_punch: {fileID: 21300000, guid: ddfe1767b55b3ce448df7b58e4a5f9c7, type: 3}
 --- !u!212 &1939033894
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -788,12 +867,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f657c269c305b97408535591ad6aa3eb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ddfe1767b55b3ce448df7b58e4a5f9c7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.89, y: 0.8}
+  m_Size: {x: 22.49, y: 11.999999}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -807,7 +886,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.24, y: 0.55, z: 0}
   m_LocalScale: {x: 0.03946571, y: 0.03808148, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 13800354}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
