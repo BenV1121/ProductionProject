@@ -59,9 +59,7 @@ public class BaseController : MonoBehaviour {
         {
             playerClass.Update();
         }
-
-
-
+        
         //Code for mimic duration. Disabled for now unless we want it back
         //if (playerClass != (ClassMirror)playerClass)
         //{

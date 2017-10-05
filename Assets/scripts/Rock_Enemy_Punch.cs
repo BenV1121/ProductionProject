@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rock_Enemy_Punch : MonoBehaviour {
-
-    GameObject parent;
-    enum STATE { MOVE_LEFT, MOVE_RIGHT, STAND_STILL, LANDING, REEL_BACK, ATTACK }
+public class Rock_Enemy_Punch : MonoBehaviour
+{
+    public BoxCollider2D punchcollider;
 
     // Use this for initialization
-    void Start () {
-		
-	}
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    void Start()
     {
-        if(parent.GetComponent<Rock_Enemy>().curr_state == STATE.ATTACK)
+        punchcollider = GetComponent<BoxCollider2D>();
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (GetComponentInParent<Rock_Enemy>().curr_state == Rock_Enemy.STATE.ATTACK)
         {
 
         }
