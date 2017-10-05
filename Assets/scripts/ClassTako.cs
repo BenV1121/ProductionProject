@@ -26,7 +26,7 @@ public class ClassTako : ClassBase {
     float timer = 0;
     //last know enemy position
     Vector2 LastPosition;
-
+    bool SetLastPosition;
 
     public override void HandleInput()
     {
@@ -46,20 +46,38 @@ public class ClassTako : ClassBase {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        //Debug.Log("enter");
+        if (other.gameObject.tag == "Player")
+        {
+            //LastPosition = other.transform.position;
+            SetLastPosition = true;
+            Debug.Log("player enter");
+        }
 
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
-        LastPosition = other.transform.position;
-        //Debug.Log("stay");
+        if(other.gameObject.tag == "Player")
+        {
+            LastPosition = other.transform.position;
+
+            
+        }
+        //other != null && other != other.gameObject.tag.Equals("Player") && other != gameObject.tag.Equals("SelfAI");
+
+
+
+
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-       LastPosition = gameObject.transform.position;
-       //Debug.Log("exit");
+        if (other.gameObject.tag == "Player")
+        {
+            //LastPosition = other.transform.position;
+
+            Debug.Log("player exit");
+        }
 
     }
 
@@ -68,7 +86,7 @@ public class ClassTako : ClassBase {
         hit = Physics2D.RaycastAll(transform.position, -transform.up, HitDistance);
         for (int i = 0; i < hit.Length; i++)
         {
-            if (hit != null && hit[i] != hit[i].collider.gameObject.tag.Equals("Player"))
+            if (hit != null && hit[i] != hit[i].collider.gameObject.tag.Equals("Player") && hit[i] != hit[i].collider.gameObject.tag.Equals("SelfAI"))
             {
                 //Debug.Log(hit[i].collider.gameObject.name);
                 control.isGrounded = true;
@@ -137,6 +155,44 @@ public class ClassTako : ClassBase {
 
     }
 
+    void JumpTowardPoint()
+    {
+        float gravity = Physics.gravity.magnitude;
+        float initialVelocity = CalculateJumpSpeed(50, gravity);
+
+        Vector2 direction = (LastPosition - rb.position);
+
+        rb.AddForce(initialVelocity * direction, ForceMode2D.Impulse);
+    }
+
+    private float CalculateJumpSpeed(float jumpHeight, float gravity)
+    {
+        return Mathf.Sqrt(2 * jumpHeight * gravity);
+    }
+
+    public void AIscript()
+    {
+        CanJump();
+
+
+      
+
+
+
+        //default jump
+        if (timer > 1 && control.isGrounded == true)
+        {
+            rb.AddForce(Vector2.up * 5f, ForceMode2D.Impulse);
+            if(LastPosition != null && SetLastPosition == true)
+            {
+                JumpTowardPoint();
+               // rb.AddForce(Vector2.up * LastPosition, ForceMode2D.Impulse);
+               // rb.
+            }
+            timer = 0;
+        }
+    }
+
     // Update is called once per frame
     public override void Update ()
     {
@@ -149,14 +205,8 @@ public class ClassTako : ClassBase {
         }
         if(control.isEnemyAI)
         {
-            CanJump();
-            if (timer > 1 && control.isGrounded == true)
-            {
-                rb.AddForce(Vector2.up * 5f, ForceMode2D.Impulse);
-               
-                timer = 0;
-            }
-           
+            this.gameObject.tag = ("SelfAI");
+            AIscript();
         }
         if(control.isGrounded)
             Debug.Log("grounded");
