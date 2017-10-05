@@ -8,7 +8,9 @@ public class ClassMirror : ClassBase {
     public BoxCollider2D mimicCollider;
     public bool canMimic = false;
     public ClassBase otherClass;
-    public System.Type otherType;
+    public System.Type otherType;    
+
+
 
 	// Use this for initialization
 	override public void Start ()
@@ -58,6 +60,7 @@ public class ClassMirror : ClassBase {
                 control.playerClass = gameObject.AddComponent(otherClass.GetType()) as ClassBase;            
 
                 Destroy(otherClass.gameObject);
+                Destroy(mimicCollider);
                 Destroy(this);
             }             
         }

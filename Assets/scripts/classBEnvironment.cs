@@ -20,7 +20,7 @@ public class classBEnvironment : MonoBehaviour {
         //If the wall is rock and is attacked by a rock dude, destroy it
         
         if(thiswallis == walltyp.ROCK &&
-           collider.gameObject.GetComponent<Rock_Enemy>() &&
+           collider.gameObject.GetComponent<Rock_Enemy>() &&           
            collider.gameObject.GetComponent<BaseController>().playerState == BaseController.PlayerState.ATTACK)
         {
             breakMe();
@@ -29,8 +29,10 @@ public class classBEnvironment : MonoBehaviour {
         //if the wall is wood and is hit by a fireball destroy it
         if(thiswallis == walltyp.WOOD &&
            collider.gameObject.tag == "FireBall")
+           //collider.gameObject.GetComponent<ShotScript>())
+           
         {
             breakMe();
         }
-    }
+    }    
 }
