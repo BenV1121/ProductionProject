@@ -409,13 +409,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcad2d2d9e90f84c884a61a3a3092d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HitDist: 1.2
+  HitDist: 0.6
   control: {fileID: 951871843}
   sprite: {fileID: 0}
   speed: 3
   movement: {x: 0, y: 0}
   rb: {fileID: 951871838}
-  HitDistance: 0.6
+  HitDistance: 0.4
   jumpforce: 2
   jumpMultiplyer: 2
 --- !u!58 &951871842
@@ -447,7 +447,7 @@ MonoBehaviour:
   playerState: 0
   myCollider: {fileID: 951871842}
   rb: {fileID: 951871838}
-  isEnemyAI: 0
+  isEnemyAI: 1
   isDead: 0
   mimicTimer: 0
   attackCooldownTime: 1.5

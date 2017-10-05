@@ -4,18 +4,29 @@ using UnityEngine;
 
 public class ClassTako : ClassBase {
 
-    public float HitDistance;
     public Rigidbody2D rb;
-    float tempdt = 0f;
-    float timer = 0;
-    Vector2 LastPosition;
+   
+
+    //raycast for jump targets
+    public float HitDistance;
     RaycastHit2D[] hit;
-    float currentBTime;
-    float jumpForce;
+
+
+    //the time current time the button has been helpd
+    float GameTime;
+    //temporary delta time
+    float tempdt = 0f;
+    float jumpTime = 0f;
+    public float jumpforce;
     public float jumpMultiplyer;
 
+ 
+ //// AI CODE
+    //timer being used for AI
+    float timer = 0;
+    //last know enemy position
+    Vector2 LastPosition;
 
-    // Use this for initialization
 
     public override void HandleInput()
     {
@@ -29,37 +40,37 @@ public class ClassTako : ClassBase {
         control = GetComponent<BaseController>();
 
         control.isJumping = false;
-        control.maxJumpForce = 3f;
+       // control.maxJumpForce = 0f;
         rb = GetComponent<Rigidbody2D>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("enter");
+        //Debug.Log("enter");
 
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
         LastPosition = other.transform.position;
-        Debug.Log("stay");
+        //Debug.Log("stay");
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
        LastPosition = gameObject.transform.position;
-        Debug.Log("exit");
+       //Debug.Log("exit");
 
     }
 
-    public override void HandleJump()
+    public void CanJump()
     {
         hit = Physics2D.RaycastAll(transform.position, -transform.up, HitDistance);
         for (int i = 0; i < hit.Length; i++)
         {
             if (hit != null && hit[i] != hit[i].collider.gameObject.tag.Equals("Player"))
             {
-                Debug.Log(hit[i].collider.gameObject.name);
+                //Debug.Log(hit[i].collider.gameObject.name);
                 control.isGrounded = true;
 
 
@@ -69,41 +80,60 @@ public class ClassTako : ClassBase {
                 control.isGrounded = false;
 
 
+
             }
 
         }
         Debug.DrawRay(transform.position, -transform.up * HitDistance, Color.red);
-
+    }
+    public override void HandleJump()
+    {
+        CanJump();
 
 
         if (control.isGrounded == true && Input.GetKeyDown(KeyCode.Space))
         {
-            currentBTime = Time.time;
+            //starting game time from button down
+            GameTime = Time.time;
             Debug.Log("Charging...");
+
         }
         if (control.isGrounded == true && Input.GetKeyUp(KeyCode.Space))
         {
-            jumpForce = Time.time - currentBTime;
+           
 
-            if ((jumpForce < 1))
+            //subtract the current game time by what it was when button first started getting held down
+            jumpTime = Time.time - GameTime;
+            Debug.Log(jumpTime);
+
+            if ((jumpTime < .65))
             {
-                rb.AddForce(Vector2.up * control.maxJumpForce, ForceMode2D.Impulse);
-                Debug.Log("JAAAUP...");
-                jumpForce = 0;
+                rb.AddForce(Vector2.up * 5f, ForceMode2D.Impulse);
+               //Debug.Log("JAAAUP...");
+                rb.gravityScale = 3f;
+
 
 
             }
             else
             {
-                rb.AddForce(Vector2.up * control.maxJumpForce * jumpMultiplyer, ForceMode2D.Impulse);
-                Debug.Log("maxy");
-                jumpForce = 0;
+                rb.AddForce(Vector2.up * 7f, ForceMode2D.Impulse);
+                rb.gravityScale = 3.5f;
+               
+                //Debug.Log("maxy");
+                
 
 
             }
 
         }
-        jumpForce = 0;
+        if(control.isGrounded == false)
+        {
+            GameTime = Time.time;
+
+        }
+
+
 
     }
 
@@ -119,13 +149,20 @@ public class ClassTako : ClassBase {
         }
         if(control.isEnemyAI)
         {
-            if(timer > 1)
+            CanJump();
+            if (timer > 1 && control.isGrounded == true)
             {
-                rb.AddForce(Vector2.up * control.maxJumpForce, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * 5f, ForceMode2D.Impulse);
+               
                 timer = 0;
             }
            
         }
-        Debug.Log(timer);
-	}
+        if(control.isGrounded)
+            Debug.Log("grounded");
+        else
+            Debug.Log("Air");
+
+
+    }
 }
