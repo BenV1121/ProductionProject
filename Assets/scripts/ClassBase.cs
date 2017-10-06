@@ -9,7 +9,7 @@ public class ClassBase : MonoBehaviour {
 
     // Ground Checks
     public float HitDist;    
-    public RaycastHit2D[] hits;    
+    public RaycastHit2D[] hits;
     public ContactFilter2D groundContacts;
     public float lastDistance;
 
@@ -47,7 +47,6 @@ public class ClassBase : MonoBehaviour {
 
     public virtual void HandleJump()
     {
-
         if (control.isGrounded == true && Input.GetKeyDown(KeyCode.Space))
         {
             control.rb.AddForce(Vector2.up * control.maxJumpForce, ForceMode2D.Impulse);
@@ -64,7 +63,6 @@ public class ClassBase : MonoBehaviour {
         //    control.rb.velocity += Vector2.up * Physics2D.gravity.y * (control.fallSpeed - 1) * Time.deltaTime;
 
         //}
-
 
         //else if(control.rb.velocity.y > 0 && !Input.GetButton("Jump"))
         //{
@@ -98,7 +96,6 @@ public class ClassBase : MonoBehaviour {
             {
                 control.isGrounded = false;
             }
-
         }
         Debug.DrawRay(control.transform.position, -control.transform.up * HitDist, Color.red);
 
@@ -107,7 +104,6 @@ public class ClassBase : MonoBehaviour {
             control.rb.AddForce(Vector2.up * control.maxJumpForce, ForceMode2D.Impulse);
             //Debug.Log("JAAAUP...");
             control.rb.gravityScale = 3f;
-
         }
     }
 
@@ -118,7 +114,6 @@ public class ClassBase : MonoBehaviour {
             // Horizontal movement
             float xInput = Input.GetAxis("Horizontal");
 
-
             movement.x = xInput * control.walkSpeedMult * speed;
             control.rb.AddForce(movement, ForceMode2D.Impulse);
 
@@ -127,8 +122,6 @@ public class ClassBase : MonoBehaviour {
                 control.rb.velocity = new Vector2(control.maxWalkSpeed, control.rb.velocity.y);
             if (control.rb.velocity.x < -control.maxWalkSpeed)
                 control.rb.velocity = new Vector2(-control.maxWalkSpeed, control.rb.velocity.y);
-
-
             control.rb.velocity = new Vector2(xInput * control.maxWalkSpeed, control.rb.velocity.y);
         }        
     }
