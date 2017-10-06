@@ -20,7 +20,7 @@ public class ClassMirror : ClassBase {
         mimicCollider = gameObject.AddComponent<CapsuleCollider2D>();
         mimicCollider.isTrigger = true;
         mimicCollider.direction = CapsuleDirection2D.Horizontal;
-        mimicCollider.size = new Vector2(1f, 3f);
+        mimicCollider.size = new Vector2(4f, 2f);
 
         otherClass = null;
     }
@@ -72,7 +72,21 @@ public class ClassMirror : ClassBase {
 
             if (otherClass != null)
             {
-                control.playerClass = gameObject.AddComponent(otherClass.GetType()) as ClassBase;            
+                //Reference for sanity
+                SpriteRenderer other = otherClass.GetComponentInChildren<SpriteRenderer>();                
+                BoxCollider2D otherBox = otherClass.control.myCollider;
+
+                //Transfer Class type
+                control.playerClass = gameObject.AddComponent(otherClass.GetType()) as ClassBase;
+
+                //Transfer sprites and collision box sizes and whatever
+                sprite.sprite = other.sprite;
+                sprite.transform.localScale = other.transform.localScale;
+                //transform.localScale = other.GetComponentInParent<Transform>().localScale;
+                gameObject.transform.localScale = otherBox.gameObject.transform.localScale;
+
+                control.myCollider.offset = otherBox.offset;
+                control.myCollider.size = otherBox.size;
 
                 Destroy(otherClass.gameObject);
                 Destroy(mimicCollider);
