@@ -88,7 +88,6 @@ public class ClassMirror : ClassBase {
                 control.myCollider.offset = otherBox.offset;
                 control.myCollider.size = otherBox.size;
 
-
                 Destroy(otherClass.gameObject);
                 Destroy(mimicCollider);
                 Destroy(this);
