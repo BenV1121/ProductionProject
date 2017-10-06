@@ -34,11 +34,15 @@ public class ClassTako : ClassBase {
 
     public override void Start()
     {
+        base.Start();
         control = GetComponent<BaseController>();
 
         control.isJumping = false;
        // control.maxJumpForce = 0f;
         rb = GetComponent<Rigidbody2D>();
+        HitDistance = 1f;
+        control.minJumpForce = 4.5f;
+        control.maxJumpForce = 7f;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -110,7 +114,7 @@ public class ClassTako : ClassBase {
 
             if ((jumpTime < .65))
             {
-                rb.AddForce(Vector2.up * 5f, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * control.minJumpForce, ForceMode2D.Impulse);
                //Debug.Log("JAAAUP...");
                 rb.gravityScale = 3f;
 
@@ -119,7 +123,7 @@ public class ClassTako : ClassBase {
             }
             else
             {
-                rb.AddForce(Vector2.up * 7f, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * control.maxJumpForce, ForceMode2D.Impulse);
                 rb.gravityScale = 3.5f;
                
                 //Debug.Log("maxy");

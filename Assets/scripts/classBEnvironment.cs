@@ -8,11 +8,24 @@ public class classBEnvironment : MonoBehaviour {
     //im using this to indicate wether a wall is wood or rock
     public enum walltyp { ROCK, WOOD};
     public walltyp thiswallis;
+    SpriteRenderer sr;
+
+    private void Start()
+    {
+        if (GetComponent<SpriteRenderer>())
+            sr = GetComponent<SpriteRenderer>();
+    }
 
     //destroys the object this class is attached to
     void breakMe()
     {
-        Destroy(gameObject);
+        if (sr != null)
+        {
+            sr.enabled = false;
+            Destroy(gameObject, .6f);
+        }
+        else
+            Destroy(gameObject);
     }
 
     void OnTriggerEnter2D(Collider2D collider)

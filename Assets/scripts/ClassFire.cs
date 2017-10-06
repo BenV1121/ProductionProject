@@ -11,7 +11,7 @@ public class ClassFire : ClassBase
     // Use this for initialization
     public override void Start()
     {
-        base.Start();
+        base.Start();        
         if (control.isEnemyAI == true)
         {
             fireRange = gameObject.AddComponent<CircleCollider2D>();
@@ -23,10 +23,13 @@ public class ClassFire : ClassBase
             control = transform.GetComponent<BaseController>();
 
         fps = gameObject.AddComponent<FireProjectileScript>();
+<<<<<<< HEAD
 
 
         fireRange.isTrigger = true;
         fireRange.radius = 1f;
+=======
+>>>>>>> dev
     }
 
     public override void HandleInput()
@@ -76,7 +79,7 @@ public class ClassFire : ClassBase
     // Update is called once per frame
     override public void Update()
     {
-        UpdateSprite();
+        base.Update();        
 
         //if (control.isEnemyAI == false)
         //{

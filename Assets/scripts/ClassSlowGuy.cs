@@ -70,14 +70,16 @@ public class ClassSlowGuy : ClassBase {
         }
     }
 
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+    }
+
+
+
     // Update is called once per frame
     override public void Update () {
         base.Update();
-
-        if (!control.isEnemyAI)
-        {
-            HandleInput();
-        }
 
         if (control.isEnemyAI)
         {
