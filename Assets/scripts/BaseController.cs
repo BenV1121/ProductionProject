@@ -10,12 +10,15 @@ public class BaseController : MonoBehaviour {
     public enum PlayerState { IDLE, ATTACK, DEATH, MIMIC };
     public PlayerState playerState;
 
-    public CircleCollider2D myCollider;
+    public BoxCollider2D myCollider;
 
     public Rigidbody2D rb;
 
     public bool isEnemyAI = false;
     public bool isDead = false;
+
+    //Prefab mirror for some variable information
+    GameObject prefab;
 
     //Mimic variables
     public const float mimicDuration = 10f;
@@ -46,10 +49,10 @@ public class BaseController : MonoBehaviour {
     
 
 	void Start () {
-        myCollider = GetComponent<CircleCollider2D>();
+        myCollider = GetComponent<BoxCollider2D>();
 
-        if (GetComponent<CircleCollider2D>())
-            myCollider = GetComponent<CircleCollider2D>();
+        if (GetComponent<BoxCollider2D>())
+            myCollider = GetComponent<BoxCollider2D>();
 
         if (GetComponent<Rigidbody2D>())
             rb = GetComponent<Rigidbody2D>();
@@ -61,6 +64,7 @@ public class BaseController : MonoBehaviour {
 
         playerState = PlayerState.IDLE;
 
+        prefab = (GameObject)Resources.Load("MirrorGuy");
 
     }
 	
@@ -102,8 +106,7 @@ public class BaseController : MonoBehaviour {
         {
             if (Input.GetButton("Fire2"))
             {
-                if (!gameObject.GetComponent<ClassMirror>()
-                && playerState != PlayerState.MIMIC)
+                if (playerClass != (ClassMirror)playerClass && playerState != PlayerState.MIMIC)
                 {
                     if (GetComponent<FireProjectileScript>())
                     {
@@ -111,7 +114,21 @@ public class BaseController : MonoBehaviour {
                     }
 
                     Destroy(playerClass);                    
-                    playerClass = gameObject.AddComponent<ClassMirror>();                    
+                    playerClass = gameObject.AddComponent<ClassMirror>();
+
+                    prefab = Instantiate(prefab);                    
+
+                    playerClass.sprite.sprite = prefab.GetComponentInChildren<SpriteRenderer>().sprite;
+                    
+                    myCollider = prefab.GetComponent<BoxCollider2D>();                    
+                    transform.localScale = prefab.transform.localScale;
+
+                    gameObject.transform.localScale = prefab.gameObject.transform.localScale;
+
+                    myCollider.offset = prefab.GetComponent<BoxCollider2D>().offset;
+                    myCollider.size = prefab.GetComponent<BoxCollider2D>().size;
+
+                    Destroy(prefab);
                 }
             }
         }
