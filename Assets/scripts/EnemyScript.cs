@@ -5,14 +5,19 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
 
-    BaseController myControl;
-    //BaseController otherControl;
+    public GameObject player;
+    public GameObject enemy;
 
+    BaseController myControl;
+    GameOverManager gom;
 
 	// Use this for initialization
 	void Start ()
     {
-        myControl = GetComponent<BaseController>();
+        myControl = player.GetComponent<BaseController>();
+        gom = GetComponent<GameOverManager>();
+
+        enemy.AddComponent<EnemyScript>();
     }
 	
 	// Update is called once per frame
@@ -24,28 +29,29 @@ public class EnemyScript : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other)
     {
         //If I'm player
-        if (myControl.isEnemyAI == false)
+        if (other.gameObject.tag == "Player")
         {
-            if (gameObject.GetComponent<Rock_Enemy>() && other.gameObject.GetComponent<ClassFire>())
+            if (enemy.GetComponent<Rock_Enemy>() && myControl.playerClass == player.GetComponent<ClassFire>())
             {
                 Destroy(myControl.playerClass);
-                myControl.playerClass = gameObject.AddComponent<ClassMirror>();
+                myControl.playerClass = player.AddComponent<ClassMirror>();
             }
-            if (gameObject.GetComponent<ClassFire>() || gameObject.GetComponent<FireProjectileScript>() && other.gameObject.GetComponent<ClassTako>())
+            if (enemy.GetComponent<ClassFire>() || enemy.GetComponent<FireProjectileScript>() && myControl.playerClass == player.gameObject.GetComponent<ClassTako>())
             {
                 Destroy(myControl.playerClass);
-                myControl.playerClass = gameObject.AddComponent<ClassMirror>();
+                myControl.playerClass = player.AddComponent<ClassMirror>();
             }
-            if (gameObject.GetComponent<ClassTako>() && other.gameObject.GetComponent<Rock_Enemy>())
+            if (enemy.GetComponent<ClassTako>() && myControl.playerClass == player.GetComponent<Rock_Enemy>())
             {
                 Destroy(myControl.playerClass);
-                myControl.playerClass = gameObject.AddComponent<ClassMirror>();
+                myControl.playerClass = player.AddComponent<ClassMirror>();
             }
 
-            //if (gameObject.GetComponent<Rock_Enemy>() || gameObject.GetComponent<ClassFire>() || gameObject.GetComponent<ClassTako>() && other.gameObject.GetComponent<ClassMirror>())
-            //{
-                 
-            //}
+            if (enemy.GetComponent<Rock_Enemy>() || enemy.GetComponent<ClassFire>() || enemy.GetComponent<FireProjectileScript>() || enemy.GetComponent<ClassTako>() && myControl.playerClass == player.GetComponent<ClassMirror>())
+            {
+                myControl.isDead = true;
+                Debug.Log("yeah");
+            }
         }
     }
 }

@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GameOverManager : ClassBase
+public class GameOverManager : MonoBehaviour
 {
     public Button replay;
     public Button quit;
 
     public GameObject cube;
+    public GameObject player;
 
     public float timer;
 
@@ -17,10 +18,13 @@ public class GameOverManager : ClassBase
 
     public string scene;
 
+    BaseController control;
+
 	// Use this for initialization
 	void Start ()
     {
-        GameOver.gameObject.SetActive(false);	
+        GameOver.gameObject.SetActive(false);
+        control = player.GetComponent<BaseController>();
 	}
 	
 	// Update is called once per frame

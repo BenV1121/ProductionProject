@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 58104448816053782}
   - component: {fileID: 114884748693822614}
   - component: {fileID: 114647575290149752}
+  - component: {fileID: 114324047042942994}
   m_Layer: 0
   m_Name: EProjectile
   m_TagString: FireBall
@@ -58,6 +59,37 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
+--- !u!114 &114324047042942994
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1998713991152708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3029bc95a792b58488f6dccb205c1c48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitDist: 0
+  groundContacts:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  lastDistance: 0
+  control: {fileID: 0}
+  sprite: {fileID: 0}
+  speed: 0
+  movement: {x: 0, y: 0}
 --- !u!114 &114647575290149752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  isEnemyShot: 1
+  isEnemyShot: 0
 --- !u!212 &212275169021590438
 SpriteRenderer:
   m_ObjectHideFlags: 1
