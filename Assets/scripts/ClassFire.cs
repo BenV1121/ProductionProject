@@ -23,6 +23,15 @@ public class ClassFire : ClassBase
             control = transform.GetComponent<BaseController>();
 
         fps = gameObject.AddComponent<FireProjectileScript>();
+<<<<<<< HEAD
+=======
+
+
+
+        fireRange.isTrigger = true;
+        fireRange.radius = 1f;
+
+>>>>>>> origin/keil
     }
 
     public override void HandleInput()
