@@ -100,42 +100,6 @@ public class Rock_Enemy : ClassBase
                 }
             }
         }
-        if (curr_state == STATE.STAND_STILL)
-        {
-            if (!hasHopped)
-            {
-                if (Input.GetKey(KeyCode.A))
-                {
-                    curr_state = STATE.MOVE_RIGHT;
-                    rb.velocity = new Vector3(-1, 3, 0);
-                    hasHopped = true;
-                    rend.flipX = false;
-                    rend.sprite = image_jump;
-                    rock_collider.offset = new Vector2(-3.2f, 1.87f);
-                    rock_collider.size = new Vector2(14.15f, 13.09f);
-
-                    GetComponentInChildren<Rock_Enemy_AI>().detectionCollider.offset = new Vector2(-45.5f, 8.66f);
-                }
-                if (Input.GetKey(KeyCode.D))
-                {
-                    curr_state = STATE.MOVE_LEFT;
-                    rb.velocity = new Vector3(1, 3, 0);
-                    hasHopped = true;
-                    rend.flipX = true;
-                    rend.sprite = image_jump;
-                    rock_collider.offset = new Vector2(-3.2f, 1.87f);
-                    rock_collider.size = new Vector2(14.15f, 13.09f);
-
-                    GetComponentInChildren<Rock_Enemy_AI>().detectionCollider.offset = new Vector2(45.5f, 8.66f);
-                }
-            }
-            if (Input.GetKey(KeyCode.Space))
-            {
-                curr_state = STATE.REEL_BACK;
-                hasAttacked = true;
-                rend.sprite = image_reel_back;
-            }
-        }
     }
 
     bool BelowHalfOfHop(float end_time)
@@ -160,7 +124,7 @@ public class Rock_Enemy : ClassBase
         rock_collider.offset = new Vector2(-3.2f, 1.87f);
         rock_collider.size = new Vector2(14.15f, 13.09f);
 
-        GetComponentInChildren<Rock_Enemy_AI>().detectionCollider.offset = new Vector2(45.5f, 8.66f);
+        GetComponentInChildren<Rock_Enemy_AI>().detectionCollider.offset = new Vector2(18.5f, 3.16f);
     }
 
     public void BeginMoveRight()
@@ -173,6 +137,6 @@ public class Rock_Enemy : ClassBase
         rock_collider.offset = new Vector2(-3.2f, 1.87f);
         rock_collider.size = new Vector2(14.15f, 13.09f);
 
-        GetComponentInChildren<Rock_Enemy_AI>().detectionCollider.offset = new Vector2(-45.5f, 8.66f);
+        GetComponentInChildren<Rock_Enemy_AI>().detectionCollider.offset = new Vector2(-18.5f, 3.16f);
     }
 }
