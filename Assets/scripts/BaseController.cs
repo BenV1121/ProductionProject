@@ -39,6 +39,8 @@ public class BaseController : MonoBehaviour {
     public bool canDoubleJump = false;
     public ushort maxJumps = 1;
 
+    public bool isMirror = true;
+
     // Modify this in your enemy code
     public const float walkSpeed = 1f;
     public float maxWalkSpeed = 2.5f;
@@ -46,10 +48,12 @@ public class BaseController : MonoBehaviour {
 
     //The changing class which the mimic mechanic relies on
     public ClassBase playerClass;
-    
+    Sprite mirror;
 
 	void Start () {
         myCollider = GetComponent<BoxCollider2D>();
+
+        mirror = Resources.Load<Sprite>("Textures/MirrorSprite") as Sprite;
 
         if (GetComponent<BoxCollider2D>())
             myCollider = GetComponent<BoxCollider2D>();
@@ -106,7 +110,9 @@ public class BaseController : MonoBehaviour {
         {
             if (Input.GetButton("Fire2"))
             {
-                if (playerClass != (ClassMirror)playerClass && playerState != PlayerState.MIMIC)
+                bool isMirrorGuy = GetComponent<ClassMirror>();
+
+                if (isMirrorGuy == false && playerState != PlayerState.MIMIC)
                 {
                     if (GetComponent<FireProjectileScript>())
                     {
@@ -115,20 +121,14 @@ public class BaseController : MonoBehaviour {
 
                     Destroy(playerClass);                    
                     playerClass = gameObject.AddComponent<ClassMirror>();
-
-                    prefab = Instantiate(prefab);                    
-
-                    playerClass.sprite.sprite = prefab.GetComponentInChildren<SpriteRenderer>().sprite;
+                    playerClass.sprite = GetComponentInChildren<SpriteRenderer>();
+                    playerClass.sprite.transform.localScale = new Vector2(.22f, .22f);
+                    playerClass.sprite.sprite = mirror;
                     
-                    myCollider = prefab.GetComponent<BoxCollider2D>();                    
-                    transform.localScale = prefab.transform.localScale;
+                    transform.localScale = new Vector2(.80f, .80f);                                        
 
-                    gameObject.transform.localScale = prefab.gameObject.transform.localScale;
-
-                    myCollider.offset = prefab.GetComponent<BoxCollider2D>().offset;
-                    myCollider.size = prefab.GetComponent<BoxCollider2D>().size;
-
-                    Destroy(prefab);
+                    myCollider.offset = new Vector2();
+                    myCollider.size = new Vector2(1.2f, 1.96f);                    
                 }
             }
         }
