@@ -5,14 +5,16 @@ using UnityEngine;
 public class FireProjectileScript : MonoBehaviour
 {
 
+    public ClassFire cfBuddyFriend;
+
     /// Projectile prefab for shooting
-    public Transform shotPrefab;
+    public GameObject shotPrefab;
 
     /// Cooldown in seconds between two shots
-    public float shootingRate = 0.25f;
+    public float shootingRate = 1f;
 
     public bool shotFlip = false;
-
+    BaseController bc;
     // Cooldown
 
     private float shootCooldown;
@@ -20,6 +22,15 @@ public class FireProjectileScript : MonoBehaviour
     void Start()
     {
         shootCooldown = 0f;
+        bc = GetComponent<BaseController>();
+        cfBuddyFriend = gameObject.GetComponent<ClassFire>();
+
+        if (cfBuddyFriend.control.isEnemyAI)
+        {
+            shotPrefab = (GameObject)Resources.Load("EProjectile");
+        }
+        else
+            shotPrefab = (GameObject)Resources.Load("Projectile");
     }
 
     void Update()
@@ -28,8 +39,6 @@ public class FireProjectileScript : MonoBehaviour
         {
             shootCooldown -= Time.deltaTime;
         }
-
-        BaseController bc = GetComponent<BaseController>();
 
         if(bc.isEnemyAI == false)
         {
@@ -56,11 +65,11 @@ public class FireProjectileScript : MonoBehaviour
             shootCooldown = shootingRate;
 
             // Create a new shot
-            var shotTransform = Instantiate(shotPrefab) as Transform;
+            GameObject shotTransform = Instantiate(shotPrefab);
 
             // Assign position
 
-            shotTransform.position = transform.position;
+            shotTransform.transform.position = transform.position;
 
             // The is enemy property
             ShotScript shot = shotTransform.gameObject.GetComponent<ShotScript>();

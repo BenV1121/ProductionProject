@@ -10,46 +10,65 @@ public class BaseController : MonoBehaviour {
     public enum PlayerState { IDLE, ATTACK, DEATH, MIMIC };
     public PlayerState playerState;
 
-    public CircleCollider2D myCollider;
+    public BoxCollider2D myCollider;
 
     public Rigidbody2D rb;
 
     public bool isEnemyAI = false;
     public bool isDead = false;
 
+    //Prefab mirror for some variable information
+    GameObject prefab;
+
     //Mimic variables
     public const float mimicDuration = 10f;
     public float mimicTimer = 0;
 
-    //Movement variables
-    public float maxJumpForce = 2f;
+    //Attack variables
+    public float attackCooldownTime = 1.5f;
+    public float attackTimer = 0f;
 
-    // Modify gravity in your enemy code
-    const float fallSpeed = 5f;
-    public float fallSpeedMult = 1.0f;
+    //Movement variables
+    public float minJumpForce = 2f;
+    public float maxJumpForce = 2f;
+    public float fallSpeed = 2.5f;    
+
     public bool isJumping = false;
     public bool isGrounded = false;
 
     public bool canDoubleJump = false;
     public ushort maxJumps = 1;
 
-    // Modify walkSpeedForce in your enemy code
-    public const float walkSpeed = 5f;
+    public bool isMirror = true;
+
+    // Modify this in your enemy code
+    public const float walkSpeed = 1f;
+    public float maxWalkSpeed = 2.5f;
     public float walkSpeedMult = 1.0f;
 
     //The changing class which the mimic mechanic relies on
     public ClassBase playerClass;
+    Sprite mirror;
 
 	void Start () {
-        if (GetComponent<CircleCollider2D>())
-            myCollider = GetComponent<CircleCollider2D>();
+        myCollider = GetComponent<BoxCollider2D>();
+
+        mirror = Resources.Load<Sprite>("Textures/MirrorSprite") as Sprite;
+
+        if (GetComponent<BoxCollider2D>())
+            myCollider = GetComponent<BoxCollider2D>();
 
         if (GetComponent<Rigidbody2D>())
             rb = GetComponent<Rigidbody2D>();
 
-        playerClass = (ClassMirror)playerClass;
+        if (!isEnemyAI || playerClass == null)
+        {
+            playerClass = (ClassMirror)playerClass;
+        }
+
         playerState = PlayerState.IDLE;
 
+        prefab = (GameObject)Resources.Load("MirrorGuy");
 
     }
 	
@@ -57,22 +76,61 @@ public class BaseController : MonoBehaviour {
 
         if (!isDead)
         {
-            playerClass.Update();
+            //Not needed
+            //playerClass.Update();
+
+            // Simple State Machine
+            // Go back to IDLE after doing actions
+            switch (playerState)
+            {
+                case PlayerState.ATTACK:
+                    attackTimer += Time.deltaTime;
+
+                    if (attackTimer >= attackCooldownTime)
+                    {
+                        attackTimer = 0;
+                        playerState = PlayerState.IDLE;
+                    }
+                    break;
+
+                case PlayerState.MIMIC:
+                    attackTimer += Time.deltaTime;
+
+                    if (attackTimer >= attackCooldownTime)
+                    {
+                        attackTimer = 0;
+                        playerState = PlayerState.IDLE;
+                    }
+                    break;
+            }
         }
 
+        //Code to shed away mimic and go back to mirror.
+        if (isEnemyAI == false)
+        {
+            if (Input.GetButton("Fire2"))
+            {
+                bool isMirrorGuy = GetComponent<ClassMirror>();
 
+                if (isMirrorGuy == false && playerState != PlayerState.MIMIC)
+                {
+                    if (GetComponent<FireProjectileScript>())
+                    {
+                        Destroy(GetComponent<FireProjectileScript>());
+                    }
 
-        //Code for mimic duration. Disabled for now unless we want it back
-        //if (playerClass != (ClassMirror)playerClass)
-        //{
-        //    mimicTimer += Time.deltaTime;
-        //}
+                    Destroy(playerClass);                    
+                    playerClass = gameObject.AddComponent<ClassMirror>();
+                    playerClass.sprite = GetComponentInChildren<SpriteRenderer>();
+                    playerClass.sprite.transform.localScale = new Vector2(.22f, .22f);
+                    playerClass.sprite.sprite = mirror;
+                    
+                    transform.localScale = new Vector2(.80f, .80f);                                        
 
-        //if (mimicTimer >= mimicDuration)
-        //{
-        //    playerClass = (ClassMirror)playerClass;
-        //    mimicTimer = 0;
-        //}
-
-	}    
+                    myCollider.offset = new Vector2();
+                    myCollider.size = new Vector2(1.2f, 1.96f);                    
+                }
+            }
+        }
+	}
 }
