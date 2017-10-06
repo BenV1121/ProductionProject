@@ -4,12 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Fire
   - FireBall
-<<<<<<< HEAD
-  - Platform
-=======
-  - SelfAI
->>>>>>> dev
   layers:
   - Default
   - TransparentFX
@@ -19,7 +15,7 @@ TagManager:
   - UI
   - 
   - 
-  - Terrain
+  - 
   - 
   - 
   - 
