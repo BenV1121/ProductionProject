@@ -51,6 +51,7 @@ public class ClassBase : MonoBehaviour {
         {
             control.rb.AddForce(Vector2.up * control.maxJumpForce, ForceMode2D.Impulse);
         }
+
         //if (control.isGrounded && Input.GetButton("Jump"))
         //{            
         //    control.isGrounded = false;
@@ -95,38 +96,6 @@ public class ClassBase : MonoBehaviour {
             {
                 control.isGrounded = false;
             }
-
-            if (control.isGrounded && Input.GetButton("Jump"))
-            {
-                control.isGrounded = false;
-                control.rb.velocity = new Vector2(control.rb.velocity.x, control.maxJumpForce);
-            }
-
-            if (control.rb.velocity.y < 0)
-            {
-                control.rb.velocity += Vector2.up * Physics2D.gravity.y * (control.fallSpeed - 1) * Time.deltaTime;
-
-            }
-
-            else if (control.rb.velocity.y > 0 && !Input.GetButton("Jump"))
-            {
-                control.rb.velocity += Vector2.up * Physics2D.gravity.y * (control.minJumpForce - 1) * Time.deltaTime;
-
-            }
-
-            // Handle grounded        
-            RaycastHit2D hit2D = Physics2D.Raycast(position - new Vector2(0f, .5f), Vector2.down, HitDist, terrainLayer);
-
-            if (hit2D)
-            {
-                control.isGrounded = true;
-            }
-
-            else
-            {
-                control.isGrounded = false;
-            }
-
         }
         Debug.DrawRay(control.transform.position, -control.transform.up * HitDist, Color.red);
 
@@ -153,7 +122,6 @@ public class ClassBase : MonoBehaviour {
                 control.rb.velocity = new Vector2(control.maxWalkSpeed, control.rb.velocity.y);
             if (control.rb.velocity.x < -control.maxWalkSpeed)
                 control.rb.velocity = new Vector2(-control.maxWalkSpeed, control.rb.velocity.y);
-
             control.rb.velocity = new Vector2(xInput * control.maxWalkSpeed, control.rb.velocity.y);
         }        
     }

@@ -23,9 +23,6 @@ public class ClassFire : ClassBase
             control = transform.GetComponent<BaseController>();
 
         fps = gameObject.AddComponent<FireProjectileScript>();
-
-        fireRange.isTrigger = true;
-        fireRange.radius = 1f;
     }
 
     public override void HandleInput()
@@ -100,7 +97,7 @@ public class ClassFire : ClassBase
         {
             weapon.Attack(true);
 
-            Debug.Log("hi");
+            //Debug.Log("hi");
         }
     }
 
