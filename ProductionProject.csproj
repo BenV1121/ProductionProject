@@ -92,12 +92,17 @@
     <Compile Include="Assets\scripts\ClassMirror.cs" />
     <Compile Include="Assets\scripts\ClassSlowGuy.cs" />
     <Compile Include="Assets\scripts\ClassTako.cs" />
+    <Compile Include="Assets\scripts\Destructable.cs" />
+    <Compile Include="Assets\scripts\EnemyScript.cs" />
     <Compile Include="Assets\scripts\EnemyShootOnTrigger.cs" />
     <Compile Include="Assets\scripts\FireGuyController.cs" />
     <Compile Include="Assets\scripts\FireProjectileScript.cs" />
     <Compile Include="Assets\scripts\MovingPlatform.cs" />
     <Compile Include="Assets\scripts\ProjectileMove.cs" />
     <Compile Include="Assets\scripts\Rock_Enemy.cs" />
+    <Compile Include="Assets\scripts\Rock_Enemy_AI.cs" />
+    <Compile Include="Assets\scripts\Rock_Enemy_Punch.cs" />
+    <Compile Include="Assets\scripts\Rock_Enemy_States.cs" />
     <Compile Include="Assets\scripts\ShotScript.cs" />
     <Compile Include="Assets\scripts\SpikeTimer.cs" />
     <Compile Include="Assets\scripts\TestHealth.cs" />

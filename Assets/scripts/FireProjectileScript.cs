@@ -30,7 +30,7 @@ public class FireProjectileScript : MonoBehaviour
             shotPrefab = (GameObject)Resources.Load("EProjectile");
         }
         else
-            shotPrefab = (GameObject)Resources.Load("Projectile");
+            shotPrefab = (GameObject)Resources.Load("PProjectile");
     }
 
     void Update()
