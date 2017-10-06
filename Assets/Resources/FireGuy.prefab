@@ -22,12 +22,27 @@ GameObject:
   - component: {fileID: 50804139449718118}
   - component: {fileID: 114790395036690034}
   - component: {fileID: 114602650128998972}
-  - component: {fileID: 212344048950033118}
   - component: {fileID: 61996068669360030}
   - component: {fileID: 198492011663834826}
   - component: {fileID: 199667971054923484}
   m_Layer: 0
   m_Name: FireGuy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1650054264813788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4873735039930352}
+  - component: {fileID: 212288834623404930}
+  m_Layer: 0
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,8 +57,22 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.4301746, y: 1.4301741, z: 1.4301741}
-  m_Children: []
+  m_Children:
+  - {fileID: 4873735039930352}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4873735039930352
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1650054264813788}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.00000016671, y: 0, z: 0}
+  m_LocalScale: {x: 0.21301472, y: 0.21301474, z: 0.21301474}
+  m_Children: []
+  m_Father: {fileID: 4535481067202408}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &50804139449718118
@@ -78,18 +107,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.000000059604645, y: 0.00000008940697}
+  m_Offset: {x: -0.009120457, y: 0.018241137}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
+    oldSize: {x: 3, y: 3}
     newSize: {x: 0.2, y: 0.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 0.6000002}
+  m_Size: {x: 0.47231293, y: 0.5635181}
   m_EdgeRadius: 0
 --- !u!114 &114602650128998972
 MonoBehaviour:
@@ -119,7 +148,7 @@ MonoBehaviour:
     maxNormalAngle: 0
   lastDistance: 0
   control: {fileID: 114790395036690034}
-  sprite: {fileID: 0}
+  sprite: {fileID: 212288834623404930}
   speed: 0
   movement: {x: 0, y: 0}
 --- !u!114 &114790395036690034
@@ -210,7 +239,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1498061078
+  randomSeed: 2064447438
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3465,12 +3494,12 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!212 &212344048950033118
+--- !u!212 &212288834623404930
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1133221950783124}
+  m_GameObject: {fileID: 1650054264813788}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -3497,12 +3526,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9332e2e6d986bc740b2de16f5a227abe, type: 3}
-  m_Color: {r: 0.97079104, g: 1, b: 0.4705882, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 186913bd50186f74f993a1af69f1b2b4, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 3, y: 3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

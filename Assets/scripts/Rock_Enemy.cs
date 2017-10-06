@@ -30,6 +30,11 @@ public class Rock_Enemy : ClassBase
     // Update is called once per frame
     public override void Update()
     {
+        if (curr_state == STATE.ATTACK)
+        {
+            
+        }
+
         if ((curr_state == STATE.MOVE_LEFT || curr_state == STATE.MOVE_RIGHT) && (hasHopped && rb.velocity.y == 0))
         {
             hasHopped = false;
@@ -54,6 +59,7 @@ public class Rock_Enemy : ClassBase
             if (curr_time > end_time_reelback)
             {
                 curr_state = STATE.ATTACK;
+                control.playerState = BaseController.PlayerState.ATTACK;
                 rend.sprite = image_punch;
                 curr_time = 0;
                 GetComponentInChildren<Rock_Enemy_Punch>().punchcollider.enabled = true;
@@ -66,6 +72,7 @@ public class Rock_Enemy : ClassBase
             if (curr_time > end_time_attacking)
             {
                 curr_state = STATE.STAND_STILL;
+                control.playerState = BaseController.PlayerState.IDLE;
                 rend.sprite = image_idle;
                 curr_time = 0;
                 GetComponentInChildren<Rock_Enemy_Punch>().punchcollider.enabled = false;
@@ -100,9 +107,9 @@ public class Rock_Enemy : ClassBase
                 }
             }
         }
-        if (curr_state == STATE.STAND_STILL)
+        if (curr_state == STATE.STAND_STILL && control.isEnemyAI == false)
         {
-            if (!hasHopped)
+            if (!hasHopped )
             {
                 if (Input.GetKey(KeyCode.A))
                 {
@@ -129,7 +136,7 @@ public class Rock_Enemy : ClassBase
                     GetComponentInChildren<Rock_Enemy_AI>().detectionCollider.offset = new Vector2(45.5f, 8.66f);
                 }
             }
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetButton("Fire1"))
             {
                 curr_state = STATE.REEL_BACK;
                 hasAttacked = true;
