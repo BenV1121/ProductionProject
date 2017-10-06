@@ -10,12 +10,15 @@ public class BaseController : MonoBehaviour {
     public enum PlayerState { IDLE, ATTACK, DEATH, MIMIC };
     public PlayerState playerState;
 
-    public CircleCollider2D myCollider;
+    public BoxCollider2D myCollider;
 
     public Rigidbody2D rb;
 
     public bool isEnemyAI = false;
     public bool isDead = false;
+
+    //Prefab mirror for some variable information
+    GameObject prefab;
 
     //Mimic variables
     public const float mimicDuration = 10f;
@@ -36,6 +39,8 @@ public class BaseController : MonoBehaviour {
     public bool canDoubleJump = false;
     public ushort maxJumps = 1;
 
+    public bool isMirror = true;
+
     // Modify this in your enemy code
     public const float walkSpeed = 1f;
     public float maxWalkSpeed = 2.5f;
@@ -43,13 +48,15 @@ public class BaseController : MonoBehaviour {
 
     //The changing class which the mimic mechanic relies on
     public ClassBase playerClass;
-    
+    Sprite mirror;
 
 	void Start () {
-        myCollider = GetComponent<CircleCollider2D>();
+        myCollider = GetComponent<BoxCollider2D>();
 
-        if (GetComponent<CircleCollider2D>())
-            myCollider = GetComponent<CircleCollider2D>();
+        mirror = Resources.Load<Sprite>("Textures/MirrorSprite") as Sprite;
+
+        if (GetComponent<BoxCollider2D>())
+            myCollider = GetComponent<BoxCollider2D>();
 
         if (GetComponent<Rigidbody2D>())
             rb = GetComponent<Rigidbody2D>();
@@ -61,6 +68,7 @@ public class BaseController : MonoBehaviour {
 
         playerState = PlayerState.IDLE;
 
+        prefab = (GameObject)Resources.Load("MirrorGuy");
 
     }
 	
@@ -102,8 +110,9 @@ public class BaseController : MonoBehaviour {
         {
             if (Input.GetButton("Fire2"))
             {
-                if (!gameObject.GetComponent<ClassMirror>()
-                && playerState != PlayerState.MIMIC)
+                bool isMirrorGuy = GetComponent<ClassMirror>();
+
+                if (isMirrorGuy == false && playerState != PlayerState.MIMIC)
                 {
                     if (GetComponent<FireProjectileScript>())
                     {
@@ -111,7 +120,15 @@ public class BaseController : MonoBehaviour {
                     }
 
                     Destroy(playerClass);                    
-                    playerClass = gameObject.AddComponent<ClassMirror>();                    
+                    playerClass = gameObject.AddComponent<ClassMirror>();
+                    playerClass.sprite = GetComponentInChildren<SpriteRenderer>();
+                    playerClass.sprite.transform.localScale = new Vector2(.22f, .22f);
+                    playerClass.sprite.sprite = mirror;
+                    
+                    transform.localScale = new Vector2(.80f, .80f);                                        
+
+                    myCollider.offset = new Vector2();
+                    myCollider.size = new Vector2(1.2f, 1.96f);                    
                 }
             }
         }
