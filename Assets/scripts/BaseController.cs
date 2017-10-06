@@ -21,33 +21,44 @@ public class BaseController : MonoBehaviour {
     public const float mimicDuration = 10f;
     public float mimicTimer = 0;
 
-    //Movement variables
-    public float maxJumpForce = 2f;
+    //Attack variables
+    public float attackCooldownTime = 1.5f;
+    public float attackTimer = 0f;
 
-    // Modify gravity in your enemy code
-    const float fallSpeed = 5f;
-    public float fallSpeedMult = 1.0f;
+    //Movement variables
+    public float minJumpForce = 2f;
+    public float maxJumpForce = 2f;
+    public float fallSpeed = 2.5f;    
+
     public bool isJumping = false;
     public bool isGrounded = false;
 
     public bool canDoubleJump = false;
     public ushort maxJumps = 1;
 
-    // Modify walkSpeedForce in your enemy code
-    public const float walkSpeed = 5f;
+    // Modify this in your enemy code
+    public const float walkSpeed = 1f;
+    public float maxWalkSpeed = 2.5f;
     public float walkSpeedMult = 1.0f;
 
     //The changing class which the mimic mechanic relies on
     public ClassBase playerClass;
+    
 
 	void Start () {
+        myCollider = GetComponent<CircleCollider2D>();
+
         if (GetComponent<CircleCollider2D>())
             myCollider = GetComponent<CircleCollider2D>();
 
         if (GetComponent<Rigidbody2D>())
             rb = GetComponent<Rigidbody2D>();
 
-        playerClass = (ClassMirror)playerClass;
+        if (!isEnemyAI || playerClass == null)
+        {
+            playerClass = (ClassMirror)playerClass;
+        }
+
         playerState = PlayerState.IDLE;
 
 
@@ -57,20 +68,53 @@ public class BaseController : MonoBehaviour {
 
         if (!isDead)
         {
-            playerClass.Update();
-        }
-        
-        //Code for mimic duration. Disabled for now unless we want it back
-        //if (playerClass != (ClassMirror)playerClass)
-        //{
-        //    mimicTimer += Time.deltaTime;
-        //}
+            //Not needed
+            //playerClass.Update();
 
-        //if (mimicTimer >= mimicDuration)
-        //{
-        //    playerClass = (ClassMirror)playerClass;
-        //    mimicTimer = 0;
-        //}
+            // Simple State Machine
+            // Go back to IDLE after doing actions
+            switch (playerState)
+            {
+                case PlayerState.ATTACK:
+                    attackTimer += Time.deltaTime;
+
+                    if (attackTimer >= attackCooldownTime)
+                    {
+                        attackTimer = 0;
+                        playerState = PlayerState.IDLE;
+                    }
+                    break;
+
+                case PlayerState.MIMIC:
+                    attackTimer += Time.deltaTime;
+
+                    if (attackTimer >= attackCooldownTime)
+                    {
+                        attackTimer = 0;
+                        playerState = PlayerState.IDLE;
+                    }
+                    break;
+            }
+        }
+
+        //Code to shed away mimic and go back to mirror.
+        if (isEnemyAI == false)
+        {
+            if (Input.GetButton("Fire2"))
+            {
+                if (!gameObject.GetComponent<ClassMirror>()
+                && playerState != PlayerState.MIMIC)
+                {
+                    if (GetComponent<FireProjectileScript>())
+                    {
+                        Destroy(GetComponent<FireProjectileScript>());
+                    }
+
+                    Destroy(playerClass);                    
+                    playerClass = gameObject.AddComponent<ClassMirror>();                    
+                }
+            }
+        }
 
 	}    
 }
