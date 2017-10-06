@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ParticleController : MonoBehaviour {
 
-    GameObject embers, jumpPoof, stone;
+    GameObject jumpPoof;
 
 	// Use this for initialization
 	void Start () {
