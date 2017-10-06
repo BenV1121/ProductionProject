@@ -47,12 +47,12 @@ public class ClassBase : MonoBehaviour {
 
     public virtual void HandleJump()
     {
-<<<<<<< HEAD
+
         if (control.isGrounded == true && Input.GetKeyDown(KeyCode.Space))
         {
             control.rb.AddForce(Vector2.up * control.maxJumpForce, ForceMode2D.Impulse);
         }
-=======
+
         //if (control.isGrounded && Input.GetButton("Jump"))
         //{            
         //    control.isGrounded = false;
@@ -64,7 +64,7 @@ public class ClassBase : MonoBehaviour {
         //    control.rb.velocity += Vector2.up * Physics2D.gravity.y * (control.fallSpeed - 1) * Time.deltaTime;
 
         //}
->>>>>>> dev
+
 
         //else if(control.rb.velocity.y > 0 && !Input.GetButton("Jump"))
         //{
@@ -98,7 +98,7 @@ public class ClassBase : MonoBehaviour {
             {
                 control.isGrounded = false;
             }
-<<<<<<< HEAD
+
 
             if (control.isGrounded && Input.GetButton("Jump"))
             {
@@ -130,7 +130,6 @@ public class ClassBase : MonoBehaviour {
             {
                 control.isGrounded = false;
             }
-=======
 
         }
         Debug.DrawRay(control.transform.position, -control.transform.up * HitDist, Color.red);
@@ -140,7 +139,7 @@ public class ClassBase : MonoBehaviour {
             control.rb.AddForce(Vector2.up * control.maxJumpForce, ForceMode2D.Impulse);
             //Debug.Log("JAAAUP...");
             control.rb.gravityScale = 3f;
->>>>>>> dev
+
         }
     }
 
@@ -150,10 +149,6 @@ public class ClassBase : MonoBehaviour {
         {
             // Horizontal movement
             float xInput = Input.GetAxis("Horizontal");
-<<<<<<< HEAD
-=======
-
->>>>>>> dev
 
             movement.x = xInput * control.walkSpeedMult * speed;
             control.rb.AddForce(movement, ForceMode2D.Impulse);
@@ -164,10 +159,6 @@ public class ClassBase : MonoBehaviour {
             if (control.rb.velocity.x < -control.maxWalkSpeed)
                 control.rb.velocity = new Vector2(-control.maxWalkSpeed, control.rb.velocity.y);
 
-<<<<<<< HEAD
-
-=======
->>>>>>> dev
             control.rb.velocity = new Vector2(xInput * control.maxWalkSpeed, control.rb.velocity.y);
         }        
     }

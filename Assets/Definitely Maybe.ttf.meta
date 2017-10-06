@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 8ba151950824c0c4187bf63f280faf28
+timeCreated: 1507315334
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Definitely Maybe
+  fontNames:
+  - Definitely Maybe
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

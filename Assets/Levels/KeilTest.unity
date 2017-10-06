@@ -247,8 +247,9 @@ MonoBehaviour:
   mimicTimer: 0
   attackCooldownTime: 1.5
   attackTimer: 0
+  minJumpForce: 2
   maxJumpForce: 5
-  fallSpeedMult: 1
+  fallSpeed: 2.5
   isJumping: 0
   isGrounded: 0
   canDoubleJump: 0
@@ -268,12 +269,150 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HitDist: 1.2
+  groundContacts:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  lastDistance: 0
   control: {fileID: 373256905}
   sprite: {fileID: 0}
   speed: 3
   movement: {x: 0, y: 0}
   rb: {fileID: 373256904}
   HitDistance: 0.4
+--- !u!1001 &694730612
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 224180845308403884, guid: 44c6d0bdd84b25544860c781c5841778,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224180845308403884, guid: 44c6d0bdd84b25544860c781c5841778,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224180845308403884, guid: 44c6d0bdd84b25544860c781c5841778,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224180845308403884, guid: 44c6d0bdd84b25544860c781c5841778,
+        type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224180845308403884, guid: 44c6d0bdd84b25544860c781c5841778,
+        type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224180845308403884, guid: 44c6d0bdd84b25544860c781c5841778,
+        type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224180845308403884, guid: 44c6d0bdd84b25544860c781c5841778,
+        type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224180845308403884, guid: 44c6d0bdd84b25544860c781c5841778,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 224180845308403884, guid: 44c6d0bdd84b25544860c781c5841778,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224180845308403884, guid: 44c6d0bdd84b25544860c781c5841778,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224180845308403884, guid: 44c6d0bdd84b25544860c781c5841778,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224180845308403884, guid: 44c6d0bdd84b25544860c781c5841778,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224180845308403884, guid: 44c6d0bdd84b25544860c781c5841778,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224180845308403884, guid: 44c6d0bdd84b25544860c781c5841778,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224180845308403884, guid: 44c6d0bdd84b25544860c781c5841778,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224180845308403884, guid: 44c6d0bdd84b25544860c781c5841778,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224180845308403884, guid: 44c6d0bdd84b25544860c781c5841778,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224180845308403884, guid: 44c6d0bdd84b25544860c781c5841778,
+        type: 2}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114650246171668940, guid: 44c6d0bdd84b25544860c781c5841778,
+        type: 2}
+      propertyPath: cube
+      value: 
+      objectReference: {fileID: 925219728}
+    - target: {fileID: 114248821056111932, guid: 44c6d0bdd84b25544860c781c5841778,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 8ba151950824c0c4187bf63f280faf28,
+        type: 3}
+    - target: {fileID: 114686530792334844, guid: 44c6d0bdd84b25544860c781c5841778,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 8ba151950824c0c4187bf63f280faf28,
+        type: 3}
+    - target: {fileID: 114433710205447608, guid: 44c6d0bdd84b25544860c781c5841778,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 8ba151950824c0c4187bf63f280faf28,
+        type: 3}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 44c6d0bdd84b25544860c781c5841778, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &925219728
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,6 +618,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HitDist: 0.6
+  groundContacts:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  lastDistance: 0
   control: {fileID: 951871843}
   sprite: {fileID: 0}
   speed: 3
@@ -519,8 +673,9 @@ MonoBehaviour:
   mimicTimer: 0
   attackCooldownTime: 1.5
   attackTimer: 0
+  minJumpForce: 2
   maxJumpForce: 2
-  fallSpeedMult: 1
+  fallSpeed: 2.5
   isJumping: 0
   isGrounded: 0
   canDoubleJump: 0
@@ -553,6 +708,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.16, y: 0.95}
   m_EdgeRadius: 0
+--- !u!1 &1197338998 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1803325456597966, guid: 44c6d0bdd84b25544860c781c5841778,
+    type: 2}
+  m_PrefabInternal: {fileID: 694730612}
+--- !u!132 &1197338999
+GUIText:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1197338998}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Text: 
+  m_Anchor: 0
+  m_Alignment: 0
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: 77693cf2eeaeb174cb4fe58ddebf3da0, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 0
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_PixelCorrect: 1
+  m_RichText: 1
 --- !u!1 &1226134156
 GameObject:
   m_ObjectHideFlags: 0
