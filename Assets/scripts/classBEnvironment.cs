@@ -31,14 +31,10 @@ public class classBEnvironment : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D collider)
     {
         //If the wall is rock and is attacked by a rock dude, destroy it
-<<<<<<< HEAD
-        if(thiswallis == walltyp.ROCK &&
-           collider.gameObject.GetComponent<Rock_Enemy>() &&
-=======
-        
+
         if(thiswallis == walltyp.ROCK &&
            collider.gameObject.GetComponent<Rock_Enemy>() &&           
->>>>>>> master
+
            collider.gameObject.GetComponent<BaseController>().playerState == BaseController.PlayerState.ATTACK)
         {
             breakMe();
