@@ -177,7 +177,7 @@ public class ClassTako : ClassBase {
         //default jump
         if (timer > 1 && control.isGrounded == true)
         {
-            rb.AddForce(Vector2.up * 5f, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * 3f, ForceMode2D.Impulse);
 
             timer = 0;
         }
